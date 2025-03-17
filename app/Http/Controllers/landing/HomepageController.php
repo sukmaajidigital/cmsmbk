@@ -33,4 +33,11 @@ class HomepageController extends Controller
         $landingabout = LandingAbout::first();
         return view('page_landing.contact', compact('landingmain', 'landingcontact', 'landingabout'));
     }
+    public function test()
+    {
+        $landingmain = LandingMain::first();
+        $landingcontact = LandingContact::first();
+        $landingabout = LandingAbout::first();
+        return view('page_landing.test', compact('landingmain', 'landingcontact', 'landingabout'));
+    }
 }

@@ -1,5 +1,5 @@
 <div class="">
-    <nav class="navbar rounded-box shadow">
+    <nav class="navbar rounded-box">
         <div class="navbar-start">
             <a class="link text-base-content link-neutral text-xl font-semibold no-underline" href="{{ route('landing.homepage') }}">
                 {{ \App\Models\landing\LandingMain::value('longname') }}

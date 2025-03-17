@@ -24,6 +24,7 @@ Route::controller(HomepageController::class)->group(function () {
     Route::get('/', 'index')->name('landing.homepage');
     Route::get('/about', 'about')->name('landing.about');
     Route::get('/contact', 'contact')->name('landing.contact');
+    Route::get('/test', 'test')->name('landing.test');
 });
 
 Route::prefix('admin')->group(function () {
