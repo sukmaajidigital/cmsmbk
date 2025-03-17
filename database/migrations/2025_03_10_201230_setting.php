@@ -20,6 +20,28 @@ return new class extends Migration
             $table->string('icon')->default('');
             $table->timestamps();
         });
+        Schema::create('landing_main', function (Blueprint $table) {
+            $table->id();
+            $table->string('shortname')->default('');
+            $table->string('longname')->default('');
+            $table->string('logo')->default('');
+            $table->string('icon')->default('');
+            $table->string('data_theme');
+            $table->timestamps();
+        });
+        Schema::create('landing_contact', function (Blueprint $table) {
+            $table->id();
+            $table->string('telepon')->default('')->nullable();
+            $table->string('alamat')->default('')->nullable();
+            $table->string('email')->default('')->nullable();
+            $table->string('maps')->default('')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('landing_about', function (Blueprint $table) {
+            $table->id();
+            $table->text('deskripsi')->default('')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,5 +50,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('setting');
+        Schema::dropIfExists('landing_main');
+        Schema::dropIfExists('landing_contact');
+        Schema::dropIfExists('landing_about');
     }
 };

@@ -56,6 +56,12 @@
                     Bahan Keluar
                 </a>
             </li>
+            <li>
+                <a href="{{ route('landingsetting') }}" class="{{ request()->routeIs('landingsetting') ? 'active' : '' }}">
+                    <span class="icon-[tabler--settings] size-5"></span>
+                    Setting Landing
+                </a>
+            </li>
         </ul>
     </div>
 
