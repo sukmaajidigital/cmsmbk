@@ -1,0 +1,1 @@
+<x-forms.text-input label="Nama Keperluan" placeholder="nama keperluan" id="nama_keperluan" type="text" name="nama_keperluan" required="required" :value="old('nama_keperluan', $keperluan->nama_keperluan ?? '')" />
