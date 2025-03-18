@@ -26,6 +26,21 @@ module.exports = {
     flyonui: {
         themes: [
             {
+                myyelow: {
+                    primary: "#FFC107", // Kuning utama yang cerah
+                    secondary: "#FFD54F", // Kuning muda sebagai warna sekunder
+                    "--rounded-box": "1.5rem", // Border-radius lebih bulat untuk box besar
+                    "--rounded-btn": "1rem", // Border-radius lebih bulat untuk tombol
+                    "--rounded-tooltip": "2rem", // Tooltip lebih membulat
+                    "--animation-btn": "0.3s", // Animasi tombol sedikit lebih lambat agar smooth
+                    "--animation-input": "0.25s", // Animasi input lebih natural
+                    "--btn-focus-scale": "0.98", // Sedikit lebih besar saat tombol difokuskan
+                    "--border-btn": "1px", // Ketebalan border tombol tetap
+                    "--tab-border": "1px", // Ketebalan border tab tetap
+                    "--tab-radius": "1rem" // Border-radius lebih bulat untuk tab
+                }
+            },
+            {
                 my: {
                     primary: "#4CAF50", // Hijau utama yang lembut
                     secondary: "#81C784", // Hijau muda sebagai warna sekunder
