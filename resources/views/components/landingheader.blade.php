@@ -7,7 +7,7 @@
         </div>
         <div class="navbar-center max-md:hidden">
             <ul class="menu menu-horizontal gap-2 p-0 text-base rtl:ml-20">
-                <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:9] [--placement:bottom-end] max-md:[--placement:bottom]">
+                {{-- <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:9] [--placement:bottom-end] max-md:[--placement:bottom]">
                     <button id="dropdown-end" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                         Products
                         <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
@@ -16,7 +16,8 @@
                         <li><a class="dropdown-item" href="#">Templates</a></li>
                         <li><a class="dropdown-item" href="#">UI kits</a></li>
                     </ul>
-                </li>
+                </li> --}}
+                <li><a href="{{ route('landing.homepage') }}">Home</a></li>
                 <li><a href="{{ route('landing.about') }}">About</a></li>
                 <li><a href="{{ route('landing.contact') }}">Contact</a></li>
             </ul>
@@ -28,7 +29,7 @@
                     <span class="icon-[tabler--x] dropdown-open:block hidden size-5"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-default">
-                    <li class="dropdown relative [--auto-close:inside] [--offset:9] [--placement:bottom-end] max-md:[--placement:bottom]">
+                    {{-- <li class="dropdown relative [--auto-close:inside] [--offset:9] [--placement:bottom-end] max-md:[--placement:bottom]">
                         <button id="dropdown-end-2" class="dropdown-toggle dropdown-item dropdown-open:bg-base-content/10 dropdown-open:text-base-content justify-between" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             Products
                             <span class="icon-[tabler--chevron-right] size-4 rtl:rotate-180"></span>
@@ -37,9 +38,10 @@
                             <li><a class="dropdown-item" href="#">Templates</a></li>
                             <li><a class="dropdown-item" href="#">UI kits</a></li>
                         </ul>
-                    </li>
-                    <li><a class="dropdown-item" href="#">About</a></li>
-                    <li><a class="dropdown-item" href="#">Careers</a></li>
+                    </li> --}}
+                    <li><a href="{{ route('landing.homepage') }}">Home</a></li>
+                    <li><a href="{{ route('landing.about') }}">About</a></li>
+                    <li><a href="{{ route('landing.contact') }}">Contact</a></li>
                 </ul>
             </div>
             <a class="btn btn-primary" href="#">Login</a>

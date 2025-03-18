@@ -17,17 +17,16 @@
 </head>
 
 <body class="bg-base-100 text-base-content">
-    <main>
-        <div class="h-screen flex flex-col">
-            <!-- Navbar -->
-            <x-landingheader />
-            <!-- Hero Section -->
-            <section class="flex-1 flex flex-col items-center  text-center p-10">
-                {{ $slot }}
-            </section>
-            <x-landingfooter />
-        </div>
-    </main>
+
+
+    <!-- Hero Section -->
+    <section class="flex-1 flex flex-col items-center  text-center">
+
+        {{ $slot }}
+    </section>
+    <x-landingfooter />
+
+
 
     @vite('resources/js/app.js')
     <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
