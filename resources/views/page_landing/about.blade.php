@@ -1,5 +1,5 @@
 <x-landinglayouts>
-    <div class="hero bg-base md:w-4/5 lg:w-4/5 mx-auto">
+    <div class="hero bg-base md:w-4/5 lg:w-3/5 mx-auto">
         <div class="hero-content flex-col lg:flex-row-reverse items-center">
             <div class="text-center lg:text-left">
                 <h1 class="text-5xl font-bold"></h1>
@@ -7,10 +7,14 @@
                     HHistory! {{ $landingabout->deskripsi }}
                 </p>
             </div>
-            <div class="w-full max-w-sm mx-auto mt-13">
-                <div class="">
-                    <img src="{{ asset('storage/' . $landingmain->logo) }}" alt="Tentang Muria Batik" class="">
-                </div>
+            <div class="w-full rounded-lg overflow-hidden mt-5">
+                @if (!empty($landingabout->imageabout))
+                    <img src="{{ asset('storage/' . $landingabout->imageabout) }}" alt="" class="h-40 object-cover rounded-lg w-full">
+                @else
+                    <div class="w-40 h-40 flex items-center justify-center  rounded-lg border">
+                        <span class="text-secondary">No Image</span>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

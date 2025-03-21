@@ -12,14 +12,14 @@ use Illuminate\View\View;
 
 class SettingLandingController extends Controller
 {
-    public function setting(): View
+    public function main(): View
     {
         $landingmain = LandingMain::first();
         $landingcontact = LandingContact::first();
         $landingabout = LandingAbout::first();
         return view('landingsetting.index', compact('landingmain', 'landingcontact', 'landingabout'));
     }
-    public function update(Request $request)
+    public function updateMain(Request $request)
     {
         $validated = $request->validate([
             'shortname' => 'required',
@@ -47,6 +47,57 @@ class SettingLandingController extends Controller
             $landingmain->update($validated);
         } else {
             LandingMain::create($validated);
+        }
+        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
+    }
+    public function about(): View
+    {
+        $landingmain = LandingMain::first();
+        $landingcontact = LandingContact::first();
+        $landingabout = LandingAbout::first();
+        return view('landingsetting.about', compact('landingmain', 'landingcontact', 'landingabout'));
+    }
+    public function updateAbout(Request $request)
+    {
+        $validated = $request->validate([
+            'deskripsi' => 'required',
+            'imageabout' => 'nullable',
+        ]);
+        $landingabout = LandingAbout::first();
+        if ($request->hasFile('imageabout')) {
+            $logoPath = $request->file('imageabout')->store('imageabout', 'public');
+            if ($landingabout && $landingabout->imageabout) {
+                Storage::disk('public')->delete($landingabout->imageabout);
+            }
+            $validated['imageabout'] = $logoPath;
+        }
+        if ($landingabout) {
+            $landingabout->update($validated);
+        } else {
+            LandingMain::create($validated);
+        }
+        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
+    }
+    public function contact(): View
+    {
+        $landingmain = LandingMain::first();
+        $landingcontact = LandingContact::first();
+        $landingabout = LandingAbout::first();
+        return view('landingsetting.contact', compact('landingmain', 'landingcontact', 'landingabout'));
+    }
+    public function updateContact(Request $request)
+    {
+        $validated = $request->validate([
+            'alamat' => 'required',
+            'telepun' => 'required',
+            'email' => 'required',
+            'maps' => 'required',
+        ]);
+        $landingcontact = LandingContact::first();
+        if ($landingcontact) {
+            $landingcontact->update($validated);
+        } else {
+            LandingContact::create($validated);
         }
         return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
     }

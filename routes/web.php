@@ -30,9 +30,16 @@ Route::controller(HomepageController::class)->group(function () {
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth', 'role:0,1,2,3'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
         // SETTING LANDING
-        Route::get('/landingsetting', [SettingLandingController::class, 'setting'])->name('landingsetting');
-        Route::put('/landingsetting', [SettingLandingController::class, 'update'])->name('landingsetting.update');
+        Route::prefix('landingsetting')->group(function () {
+            Route::get('/main', [SettingLandingController::class, 'main'])->name('landingsetting.main');
+            Route::put('/main', [SettingLandingController::class, 'updateMain'])->name('landingsetting.updatemain');
+            Route::get('/about', [SettingLandingController::class, 'about'])->name('landingsetting.about');
+            Route::put('/about', [SettingLandingController::class, 'updateAbout'])->name('landingsetting.updateabout');
+            Route::get('/contact', [SettingLandingController::class, 'contact'])->name('landingsetting.contact');
+            Route::put('/contact', [SettingLandingController::class, 'updateContact'])->name('landingsetting.updatecontact');
+        });
         // SETING ADMIN
         Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
         Route::put('/setting', [SettingController::class, 'update'])->name('setting.update');

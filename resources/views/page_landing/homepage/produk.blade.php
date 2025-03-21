@@ -1,6 +1,6 @@
 <section class="min-w-full" id="produk">
     <div class="min-w-screen h-36 bg-base-content flex items-center justify-center">
-        <h2 class="text-3xl font-bold text-white">Koleksi Batik Terbaru</h2>
+        <h2 class="text-3xl font-bold ">Koleksi Batik Terbaru</h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-6 gap-4 md:px-10">
         @for ($i = 1; $i <= 6; $i++)

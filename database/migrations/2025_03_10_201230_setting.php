@@ -40,6 +40,7 @@ return new class extends Migration
         Schema::create('landing_about', function (Blueprint $table) {
             $table->id();
             $table->text('deskripsi')->default('')->nullable();
+            $table->string('imageabout')->nullable();
             $table->timestamps();
         });
     }
