@@ -1,6 +1,6 @@
 <section class="min-w-screen min-h-screen py-16 px-6 md:px-10   text-center bg-opacity-40 mt-25">
-    <h2 class="text-3xl font-bold">Proses Membatik?</h2>
-    <p class="mt-4 text-lg">Dibuat dengan bahan premium dan sentuhan seni terbaik dari pengrajin Indonesia</p>
+    <h2 class="text-3xl font-bold">{{ \App\Models\landing\LandingControllview::value('proses_title') }}</h2>
+    <p class="mt-4 text-lg">{{ \App\Models\landing\LandingControllview::value('proses_subtitle') }}</p>
     <div class="w-full mt-6 relative flex items-center justify-center">
         <!-- Tombol kiri -->
         <button id="prevBtn" class="left-0 z-10 p-2 text-black rounded-full">❮</button>

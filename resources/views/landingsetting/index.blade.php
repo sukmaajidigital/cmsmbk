@@ -46,7 +46,7 @@
     </div>
 
     <!-- Preview Section -->
-    {{-- <div class="flex flex-col md:flex-row gap-6 p-6">
+    <div class="flex flex-col md:flex-row gap-6 p-6">
         <div class="w-full md:w-2/5  rounded-2xl p-6">
             <div class="mockup-phone-display rounded-lg overflow-hidden border border-gray-300">
                 <iframe src="{{ route('landing.homepage') }}" class="w-full h-[500px] border-none"></iframe>
@@ -60,7 +60,7 @@
                 <iframe src="{{ route('landing.homepage') }}" class="w-full h-[500px] border-none"></iframe>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
     @push('script')

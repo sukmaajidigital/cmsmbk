@@ -3,7 +3,6 @@
         <x-table.datatable tablename="proses" barisdata="5" hiddenfilter1="true" hiddenfilter2="true">
             <thead>
                 <tr>
-                    <th><input type="checkbox" id="select-all" class="checkbox checkbox-sm"></th>
                     <th>ID</th>
                     <th>Judul</th>
                     <th>Gambar Proses</th>
@@ -14,7 +13,6 @@
             <tbody>
                 @foreach ($landingproses as $proses)
                     <tr>
-                        <td><input type="checkbox" class="row-checkbox checkbox checkbox-sm"></td>
                         <td>{{ $proses->id }}</td>
                         <td>{{ $proses->judul }}</td>
                         <td>
@@ -26,7 +24,11 @@
                                 </div>
                             @endif
                         </td>
-                        <td>{{ $proses->deskripsi }}</td>
+                        <td>
+                            <div class="whitespace-normal break-words">
+                                {{ $proses->deskripsi }}
+                            </div>
+                        </td>
                         <td>
                             <div class=" flex items-center gap-3">
                                 <x-modal.buttoneditmodal title="" routes="{{ route('landingsetting.editproses', $proses->id) }}" />
@@ -39,7 +41,7 @@
         </x-table.datatable>
     </div>
     <div class="w-full h-full md:w-2/12 rounded-2xl p-6">
-        <h5 class="text-2xl font-bold text-gray-700 mb-4">Vidio Proses</h5>
+        <h5 class="text-2xl font-bold text-gray-700 mb-4">{{ \App\Models\landing\LandingControllview::value('proses_title') }}</h5>
         <x-modal.buttoncreatemodal title="Tambah Data" routes="{{ route('landingsetting.createproses') }}" />
         <x-modal.createmodal title="Tambah Data" routes="{{ route('landingsetting.storeproses') }}" />
         <x-modal.editmodal title="Edit Data" />

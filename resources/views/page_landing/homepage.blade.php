@@ -8,12 +8,12 @@
     <x-slot name="subname">
         Home
     </x-slot>
-    <section class="relative w-screen h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://muriabatikkudus.com/wp-content/uploads/2024/04/banner.jpg');">
+    <section class="relative w-screen h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}');">
         <div class="w-screen h-screen flex flex-col items-center justify-center bg-base-content bg-opacity-50 p-10 text-center text-white rounded-lg">
             <img src="{{ asset('storage/' . \App\Models\landing\LandingMain::value('logo')) }}" alt="logo" aria-placeholder="logo" class="w-40 object-cover md:w-48 mb-7">
-            <h1 class="text-5xl font-bold">The Haritage of Kudus Java</h1>
-            <p class="mt-4 text">pusat batik asli khas kudus</p>
-            <button class="mt-6 px-6 py-3 bg-primary text-white rounded-full text-lg">Jelajahi Sekarang</button>
+            <h1 class="text-5xl font-bold">{{ \App\Models\landing\LandingControllview::value('hero_tagline') }}</h1>
+            <p class="mt-4 text">{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }}</p>
+            <button class="mt-6 px-6 py-3 bg-primary text-white rounded-full text-lg">{{ \App\Models\landing\LandingControllview::value('hero_button') }}</button>
             <nav class="navbar rounded-box bg-transparent flex justify-center mt-25">
                 <div class="navbar-center bg-transparent">
                     <ul class="menu menu-horizontal gap-2 p-0 bg-transparent font-semibold">
