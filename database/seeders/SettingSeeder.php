@@ -18,8 +18,8 @@ class SettingSeeder extends Seeder
             'app_name' => 'Dashboard MBK',
             'data_theme' => 'gourmet',
             'dir' => 'ltr',
-            'logo' => 'logo/PJUMXQbq5l5EQ5GImO6Ikg8HYXxv4JYwtB1CL2ov.png',
-            'icon' => 'icons/tIqInRVDpeW8ROs5TRSQZKJXFGxWARs8kJZMx3OC.png',
+            'logo' => 'logo/logo.png',
+            'icon' => 'icons/icon.png',
         ]);
     }
 }
