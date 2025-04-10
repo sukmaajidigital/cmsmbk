@@ -20,7 +20,7 @@
                     Setting Landing
                     <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                 </a>
-                <ul id="menu-app-collapse" class="collapse {{ request()->routeIs('landingsetting.main', 'landingsetting.about', 'landingsetting.contact') ? 'block' : 'hidden' }}" aria-labelledby="menu-app">
+                <ul id="menu-app-collapse" class="collapse {{ request()->routeIs('landingsetting.main', 'landingsetting.about', 'landingsetting.contact', 'landingsetting.prosesandvidio', 'landingsetting.controllview') ? 'block' : 'hidden' }}" aria-labelledby="menu-app">
                     <li>
                         <a href="{{ route('landingsetting.main') }}" class="{{ request()->routeIs('landingsetting.main') ? 'active' : '' }}">
                             <span class="icon-[tabler--category-filled] size-5"></span>
@@ -37,6 +37,18 @@
                         <a href="{{ route('landingsetting.contact') }}" class="{{ request()->routeIs('landingsetting.contact') ? 'active' : '' }}">
                             <span class="icon-[tabler--user] size-5"></span>
                             Contact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('landingsetting.prosesandvidio') }}" class="{{ request()->routeIs('landingsetting.prosesandvidio') ? 'active' : '' }}">
+                            <span class="icon-[tabler--user] size-5"></span>
+                            Proses dan Vidio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('landingsetting.controllview') }}" class="{{ request()->routeIs('landingsetting.controllview') ? 'active' : '' }}">
+                            <span class="icon-[tabler--user] size-5"></span>
+                            Controller View
                         </a>
                     </li>
                 </ul>
