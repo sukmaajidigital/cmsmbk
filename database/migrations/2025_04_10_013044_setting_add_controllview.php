@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('hero_tagline')->default('')->nullable();
             $table->string('hero_subtagline')->default('')->nullable();
             $table->string('hero_button')->default('')->nullable();
+            $table->string('hero_image')->default('')->nullable();
             $table->string('proses_title')->default('')->nullable();
-            $table->string('prosess_subtitle')->default('')->nullable();
+            $table->string('proses_subtitle')->default('')->nullable();
             $table->string('produk_title')->default('')->nullable();
             $table->string('produk_subtitle')->default('')->nullable();
             $table->timestamps();
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('landing_controllview');
     }
 };
