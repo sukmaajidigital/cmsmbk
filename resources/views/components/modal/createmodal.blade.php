@@ -2,7 +2,7 @@
 <div id="modalTambah" class="overlay modal overlay-open:opacity-100 hidden" role="dialog" tabindex="-1">
     <div class="modal-dialog overlay-open:opacity-100 modal-dialog-{{ $size }}">
         <div class="modal-content">
-            <form class="" action="{{ $routes }}" method="POST">
+            <form class="" action="{{ $routes }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h3 class="modal-title">{{ $title }}</h3>
