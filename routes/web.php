@@ -39,6 +39,17 @@ Route::prefix('admin')->group(function () {
             Route::put('/about', [SettingLandingController::class, 'updateAbout'])->name('landingsetting.updateabout');
             Route::get('/contact', [SettingLandingController::class, 'contact'])->name('landingsetting.contact');
             Route::put('/contact', [SettingLandingController::class, 'updateContact'])->name('landingsetting.updatecontact');
+
+            Route::get('/prosesandvidio', [SettingLandingController::class, 'prosesandvidio'])->name('landingsetting.prosesandvidio');
+            Route::get('/proses/create', [SettingLandingController::class, 'createProses'])->name('landingsetting.createproses');
+            Route::post('/proses', [SettingLandingController::class, 'storeProses'])->name('landingsetting.storeproses');
+            Route::get('/proses/{landingproses}/edit', [SettingLandingController::class, 'editProses'])->name('landingsetting.editproses');
+            Route::put('/proses/{landingproses}', [SettingLandingController::class, 'updateProses'])->name('landingsetting.updateproses');
+            Route::delete('/proses/{landingproses}', [SettingLandingController::class, 'destroyProses'])->name('landingsetting.destroyproses');
+            Route::put('/vidio', [SettingLandingController::class, 'updateVidio'])->name('landingsetting.updatevidio');
+
+            Route::get('/controllview', [SettingLandingController::class, 'controllview'])->name('landingsetting.controllview');
+            Route::put('/controllview', [SettingLandingController::class, 'updateControllview'])->name('landingsetting.updatecontrollview');
         });
         // SETING ADMIN
         Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
