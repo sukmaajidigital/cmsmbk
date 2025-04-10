@@ -17,17 +17,11 @@
 </head>
 
 <body class="bg-base-100 text-base-content">
-
-
     <!-- Hero Section -->
-    <section class="flex-1 flex flex-col items-center  text-center">
-
+    <section class="overflow-x-hidden">
         {{ $slot }}
     </section>
     <x-landingfooter />
-
-
-
     @vite('resources/js/app.js')
     <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/datatable/datatable.min.js') }}"></script>

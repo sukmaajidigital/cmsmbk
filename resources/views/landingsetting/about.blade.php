@@ -1,6 +1,6 @@
 <x-layouts>
     <div class="flex flex-col md:flex-row gap-6 p-6" id="aboutsetting">
-        <div class="w-full md:w-3/5  rounded-2xl p-6">
+        <div class="w-full h-screen md:w-3/5 rounded-2xl p-6">
             <h5 class="text-2xl font-bold text-gray-700 mb-4">About</h5>
             <form action="{{ route('landingsetting.updateabout') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf

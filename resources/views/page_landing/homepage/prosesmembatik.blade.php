@@ -7,13 +7,13 @@
         <!-- Container gambar -->
         <div class="w-[60%] h-[40vh] overflow-hidden">
             <div id="carousel" class="flex transition-transform duration-300 ease-in-out">
-                @for ($i = 1; $i <= 6; $i++)
+                @foreach ($landingproses as $proses)
                     <div class="shrink-0 w-1/3 px-4 flex flex-col items-center transition-transform duration-300 ease-in-out hover:scale-110 group">
-                        <div class="w-40 h-60 bg-cover bg-center" style="background-image: url('https://muriabatikkudus.com/wp-content/uploads/2024/05/1.png');">
+                        <div class="w-40 h-60 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $proses->imageproses ?? 'https://via.placeholder.com/150') }}');">
                         </div>
-                        <p class="mt-2 text-black opacity-0 group-hover:opacity-95 transition-opacity duration-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus modi eligendi rerum at aliquid error ratione voluptates quos excepturi animi ut assumenda, exercitationem quaerat voluptas distinctio autem. Quis, perferendis aperiam! {{ $i }}</p>
+                        <p class="mt-2 text-black opacity-0 group-hover:opacity-95 transition-opacity duration-300">{{ $proses->deskripsi ?? 'kosong' }}</p>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
         <!-- Tombol kanan -->
@@ -52,6 +52,8 @@
 
     <br>
     <div class="mt-20 relative w-screen h-[30vh] overflow-hidden"> <!-- Container dengan rasio 10x3 -->
-        <iframe class="absolute top-0 left-0 w-full h-full scale-[4] origin-center object-cover" src="https://www.youtube.com/embed/x78BkJyhz74?autoplay=1&controls=0&rel=0&loop=1&mute=1&playsinline=1&playlist=x78BkJyhz74&enablejsapi=1&origin=https%3A%2F%2Fmuriabatikkudus.com&widgetid=1&forigin=https%3A%2F%2Fmuriabatikkudus.com%2F&aoriginsup=1&vf=1" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop playsinline>
+            <source src="{{ optional($landingvidio)->vidio ? asset('storage/' . $landingvidio->vidio) : 'https://via.placeholder.com/150' }}" type="video/mp4">
+        </video>
     </div>
 </section>

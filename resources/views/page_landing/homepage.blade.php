@@ -34,10 +34,10 @@
         </div>
     </section>
     {{-- proses membatik --}}
-    <div id="proses">
+    <div id="proses" class="overflow-y-hidden overflow-x-hidden">
         @include('page_landing.homepage.prosesmembatik')
     </div>
-    <div id="produk">
+    <div id="produk" class="overflow-y-hidden">
         @include('page_landing.homepage.produk')
     </div>
 
