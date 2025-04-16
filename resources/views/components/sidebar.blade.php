@@ -8,19 +8,13 @@
                     Dashboard
                 </a>
             </li>
-            <li>
-                <a href="{{ route('landingsetting.main') }}" class="{{ request()->routeIs('landingsetting.main') ? 'active' : '' }}">
-                    <span class="icon-[tabler--settings] size-5"></span>
-                    Setting Landing
-                </a>
-            </li>
             <li class="space-y-0.5">
-                <a class="collapse-toggle collapse-open:bg-base-content/10" id="menu-app" data-collapse="#menu-app-collapse">
+                <a class="collapse-toggle collapse-open:bg-base-content/10" id="menu-app" data-collapse="#setting-app-collapse">
                     <span class="icon-[tabler--user-hexagon] size-5"></span>
                     Setting Landing
                     <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                 </a>
-                <ul id="menu-app-collapse" class="collapse {{ request()->routeIs('landingsetting.main', 'landingsetting.about', 'landingsetting.contact', 'landingsetting.prosesandvidio', 'landingsetting.controllview') ? 'block' : 'hidden' }}" aria-labelledby="menu-app">
+                <ul id="setting-app-collapse" class="collapse {{ request()->routeIs('landingsetting.main', 'landingsetting.about', 'landingsetting.contact', 'landingsetting.prosesandvidio', 'landingsetting.controllview') ? 'block' : 'hidden' }}" aria-labelledby="menu-app">
                     <li>
                         <a href="{{ route('landingsetting.main') }}" class="{{ request()->routeIs('landingsetting.main') ? 'active' : '' }}">
                             <span class="icon-[tabler--category-filled] size-5"></span>
@@ -49,6 +43,33 @@
                         <a href="{{ route('landingsetting.controllview') }}" class="{{ request()->routeIs('landingsetting.controllview') ? 'active' : '' }}">
                             <span class="icon-[tabler--user] size-5"></span>
                             Controller View
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="space-y-0.5">
+                <a class="collapse-toggle collapse-open:bg-base-content/10" id="menu-app" data-collapse="#postingan-app-collapse">
+                    <span class="icon-[tabler--user-hexagon] size-5"></span>
+                    Postingan
+                    <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                </a>
+                <ul id="postingan-app-collapse" class="collapse {{ request()->routeIs('blog.index', 'produk.index', 'produkkategori.index') ? 'block' : 'hidden' }}" aria-labelledby="menu-app">
+                    <li>
+                        <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.index') ? 'active' : '' }}">
+                            <span class="icon-[tabler--category-filled] size-5"></span>
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('produkkategori.index') }}" class="{{ request()->routeIs('produkkategori.index') ? 'active' : '' }}">
+                            <span class="icon-[tabler--user] size-5"></span>
+                            Kategori Produk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('produk.index') }}" class="{{ request()->routeIs('produk.index') ? 'active' : '' }}">
+                            <span class="icon-[tabler--user] size-5"></span>
+                            Produk
                         </a>
                     </li>
                 </ul>

@@ -11,6 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeperluanController;
 use App\Http\Controllers\landing\HomepageController;
 use App\Http\Controllers\landing\SettingLandingController;
+use App\Http\Controllers\postingan\BlogController;
+use App\Http\Controllers\postingan\ProdukController;
+use App\Http\Controllers\postingan\ProdukKategoriController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +53,28 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/controllview', [SettingLandingController::class, 'controllview'])->name('landingsetting.controllview');
             Route::put('/controllview', [SettingLandingController::class, 'updateControllview'])->name('landingsetting.updatecontrollview');
+        });
+        Route::prefix('postingan')->group(function () {
+            Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+            Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+            Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+            Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+            Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('blog.update');
+            Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+            Route::get('/produkkategori', [ProdukKategoriController::class, 'index'])->name('produkkategori.index');
+            Route::get('/produkkategori/create', [ProdukKategoriController::class, 'create'])->name('produkkategori.create');
+            Route::post('/produkkategori', [ProdukKategoriController::class, 'store'])->name('produkkategori.store');
+            Route::get('/produkkategori/{produkkategori}/edit', [ProdukKategoriController::class, 'edit'])->name('produkkategori.edit');
+            Route::put('/produkkategori/{produkkategori}', [ProdukKategoriController::class, 'update'])->name('produkkategori.update');
+            Route::delete('/produkkategori/{produkkategori}', [ProdukKategoriController::class, 'destroy'])->name('produkkategori.destroy');
+
+            Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+            Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
+            Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
+            Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+            Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
+            Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
         });
         // SETING ADMIN
         Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
