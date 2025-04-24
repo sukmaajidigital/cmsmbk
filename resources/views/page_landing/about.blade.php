@@ -1,4 +1,17 @@
 <x-landinglayouts>
+    <x-slot name="meta">
+        <meta name="keywords" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }}, {{ $landingmain->longname }}, {{ $landingmain->shortname }}">
+        <meta name="author" content="admin">
+        <meta name="description" content="{{ Str::limit($landingabout->deskripsi, 200) }}">
+        <meta name="twitter:title" content="About {{ $landingmain->longname }}">
+        <meta name="twitter:description" content="{{ Str::limit($landingabout->deskripsi, 200) }}">
+        <meta name="twitter:image" content="{{ asset('storage/' . $landingabout->imageabout) }}">
+        <meta property="og:image" content="{{ asset('storage/' . $landingabout->imageabout) }}">
+        <meta property="og:description" content="{{ Str::limit($landingabout->deskripsi, 200) }}">
+    </x-slot>
+    <x-slot name="subname">
+        About
+    </x-slot>
     <div class="hero bg-base md:w-4/5 lg:w-3/5 mx-auto">
         <div class="hero-content flex-col lg:flex-row-reverse items-center">
             <div class="text-center lg:text-left">

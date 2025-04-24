@@ -1,9 +1,12 @@
 <div class="">
     <nav class="navbar rounded-box">
         <div class="navbar-start">
-            <a class="link text-base-content link-neutral text-xl font-semibold no-underline" href="{{ route('landing.homepage') }}">
-                {{ \App\Models\landing\LandingMain::value('longname') }}
-            </a>
+            <div class="flex items-center gap-2">
+                <img src="{{ asset('storage/' . \App\Models\landing\LandingMain::value('logo')) }}" alt="logo" class="w-10 h-10 object-contain">
+                {{-- <a class="link text-base-content link-neutral text-xl no-underline" href="{{ route('landing.homepage') }}">
+                    {{ \App\Models\landing\LandingMain::value('longname') }}
+                </a> --}}
+            </div>
         </div>
         <div class="navbar-center max-md:hidden">
             <ul class="menu menu-horizontal gap-2 p-0 text-base rtl:ml-20">
