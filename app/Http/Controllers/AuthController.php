@@ -37,15 +37,15 @@ class AuthController extends Controller
             );
 
             Auth::login($user, true);
-            Log::info('Google callback called');
-            Log::info($googleUser);
-            Log::info(Auth::check() ? 'User is logged in' : 'User is NOT logged in');
+
+            Log::info('✅ Google callback success');
+            Log::info($googleUser->toArray());
+            Log::info(Auth::check() ? '✅ User is logged in' : '❌ User is NOT logged in');
 
             return redirect()->intended(route('dashboard'))->with('success', 'Login Google berhasil');
         } catch (\Exception $e) {
-            Log::info('Google callback called');
-            Log::info($googleUser);
-            Log::info(Auth::check() ? 'User is logged in' : 'User is NOT logged in');
+            Log::error('❌ Google callback failed');
+            Log::error($e->getMessage());
 
             return redirect('/login')->with('error', 'Gagal login dengan Google');
         }
