@@ -93,7 +93,7 @@ class SettingLandingController extends Controller
     {
         $validated = $request->validate([
             'alamat' => 'required',
-            'telepun' => 'required',
+            'telepon' => 'required',
             'email' => 'required',
             'maps' => 'required',
         ]);

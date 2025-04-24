@@ -35,6 +35,8 @@
 
     <!-- Stylesheets -->
     @vite('resources/css/app.css')
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="289249298956-hvk63e08fjlr6s2goqo4eemnq3oqiap8.apps.googleusercontent.com">
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-100">
