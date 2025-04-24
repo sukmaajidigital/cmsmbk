@@ -23,30 +23,35 @@ class AuthController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
+            $email = $googleUser->getEmail();
+
+            if (!$email) {
+                Log::error('Email tidak tersedia dari Google');
+                return redirect('/login')->with('error', 'Email tidak tersedia.');
+            }
+
+            Log::info('Membuat user dengan email: ' . $email);
 
             $user = User::firstOrCreate(
-                ['email' => $googleUser->getEmail()],
+                ['email' => $email],
                 [
                     'role' => 0,
                     'nama_user' => $googleUser->getName(),
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'password' => bcrypt(str()->random(24)), // password dummy
+                    'password' => bcrypt(str()->random(24)),
                     'avatar' => $googleUser->getAvatar(),
                 ]
             );
 
-            Auth::login($user, true);
+            Log::info('User dibuat: ', $user->toArray());
 
-            Log::info('✅ Google callback success');
-            Log::info($googleUser->toArray());
-            Log::info(Auth::check() ? '✅ User is logged in' : '❌ User is NOT logged in');
+            Auth::login($user, true);
+            Log::info(Auth::check() ? '✅ User berhasil login' : '❌ Login gagal');
 
             return redirect()->intended(route('dashboard'))->with('success', 'Login Google berhasil');
         } catch (\Exception $e) {
-            Log::error('❌ Google callback failed');
-            Log::error($e->getMessage());
-
+            Log::error('❌ Exception: ' . $e->getMessage());
             return redirect('/login')->with('error', 'Gagal login dengan Google');
         }
     }
