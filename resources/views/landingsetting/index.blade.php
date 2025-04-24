@@ -1,6 +1,6 @@
 <x-layouts>
     <div class="flex flex-col md:flex-row gap-6 p-6">
-        <!-- Form Setting -->
+        {{-- <!-- Form Setting --> --}}
         <div class="w-full md:w-3/5  rounded-2xl p-6">
             <h5 class="text-2xl font-bold text-gray-700 mb-4">Main Setting</h5>
             <form action="{{ route('landingsetting.updatemain') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -17,7 +17,7 @@
             </form>
         </div>
 
-        <!-- Tampilan Foto -->
+        {{-- <!-- Tampilan Foto --> --}}
         <div class="w-full md:w-2/5  rounded-2xl p-6">
             <h5 class="text-2xl font-bold text-gray-700 mb-4">Preview</h5>
             <div class="space-y-6">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <!-- Preview Section -->
+    {{-- <!-- Preview Section --> --}}
     <div class="flex flex-col md:flex-row gap-6 p-6">
         <div class="w-full md:w-2/5  rounded-2xl p-6">
             <div class="mockup-phone-display rounded-lg overflow-hidden border border-gray-300">

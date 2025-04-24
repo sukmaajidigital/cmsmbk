@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <!-- Maps -->
+        {{-- <!-- Maps --> --}}
         <div class="mt-6">
             @if ($landingcontact->maps)
                 <div class="aspect-w-16 aspect-h-9">

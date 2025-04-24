@@ -143,7 +143,7 @@
         </ul>
     </div>
 
-    <!-- Footer User (Tetap di bawah) -->
+    {{-- <!-- Footer User (Tetap di bawah) --> --}}
     <div class="dropdown relative inline-flex rtl:[--placement:bottom-end] justify-center px-4 py-10">
         <button id="dropdown-avatar" type="button" class="dropdown-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
             <li class="dropdown-header gap-3">

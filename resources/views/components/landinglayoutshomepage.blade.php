@@ -21,13 +21,13 @@
     <meta name="theme-color" content="#00753C">
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}" />
 
-    <!-- Stylesheets -->
+    {{-- <!-- Stylesheets --> --}}
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('assets/datatable/datatable.css') }}" />
 </head>
 
 <body class="bg-base-100 text-base-content">
-    <!-- Hero Section -->
+    {{-- <!-- Hero Section --> --}}
     <section class="overflow-x-hidden">
         {{ $slot }}
     </section>
