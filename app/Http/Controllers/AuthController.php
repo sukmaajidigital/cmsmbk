@@ -9,6 +9,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -36,9 +37,16 @@ class AuthController extends Controller
             );
 
             Auth::login($user, true);
+            Log::info('Google callback called');
+            Log::info($googleUser);
+            Log::info(Auth::check() ? 'User is logged in' : 'User is NOT logged in');
 
             return redirect()->intended(route('dashboard'))->with('success', 'Login Google berhasil');
         } catch (\Exception $e) {
+            Log::info('Google callback called');
+            Log::info($googleUser);
+            Log::info(Auth::check() ? 'User is logged in' : 'User is NOT logged in');
+
             return redirect('/login')->with('error', 'Gagal login dengan Google');
         }
     }
