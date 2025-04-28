@@ -4,6 +4,7 @@ namespace App\Models\postingan;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Produk extends Model
 {
@@ -13,8 +14,12 @@ class Produk extends Model
 
     protected $guarded = [];
 
-    public function produklistkategori()
+    public function kategoris()
     {
-        return $this->hasMany(ProdukListkategori::class, 'produk_kategori_id');
+        return $this->belongsToMany(ProdukKategori::class, 'produk_listkategoris', 'produk_id', 'produk_kategori_id');
+    }
+    public function variasis()
+    {
+        return $this->hasMany(ProdukVariasi::class, 'produk_id');
     }
 }

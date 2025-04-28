@@ -31,6 +31,7 @@ Route::controller(HomepageController::class)->group(function () {
     Route::get('/about', 'about')->name('landing.about');
     Route::get('/contact', 'contact')->name('landing.contact');
     Route::get('/test', 'test')->name('landing.test');
+    Route::get('/{slug}', 'produk')->name('landing.produk');
 });
 
 Route::prefix('admin')->group(function () {
@@ -78,6 +79,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
             Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
             Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+
+            // Menampilkan form untuk menambah variasi
+            Route::get('produk/{produk}/variasi/create', [ProdukController::class, 'create'])->name('produk.variasi.create');
+
+            // Menyimpan variasi produk
+            Route::post('produk/{produk}/variasi', [ProdukController::class, 'store'])->name('produk.variasi.store');
         });
         // SETING ADMIN
         Route::get('/setting', [SettingController::class, 'setting'])->name('setting');

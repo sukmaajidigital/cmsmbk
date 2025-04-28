@@ -17,7 +17,26 @@
 
         {{-- Gambar (optional upload) --}}
         <x-forms.text-input required="" type="file" label="Gambar Produk" id="image" name="image" :value="old('image', $produk->image ?? '')" />
+        {{-- Preview Gambar --}}
+        <div class="mt-4">
+            @if (old('image') || ($produk->image ?? false))
+                <img id="image-preview" src="{{ old('image') ? asset('storage/' . old('image')) : asset('storage/' . $produk->image) }}" alt="Preview Gambar" class="w-32 h-32 object-cover rounded">
+            @else
+                <img id="image-preview" src="#" alt="Preview Gambar" class="w-32 h-32 object-cover rounded hidden">
+            @endif
+        </div>
+        {{-- Javascript Preview --}}
+        <script>
+            function previewImage(event) {
+                const imagePreview = document.getElementById('image-preview');
+                const file = event.target.files[0];
 
+                if (file) {
+                    imagePreview.src = URL.createObjectURL(file);
+                    imagePreview.classList.remove('hidden');
+                }
+            }
+        </script>
         {{-- SEO --}}
         <x-forms.text-input required="" label="Meta Title" id="meta_title" name="meta_title" :value="old('meta_title', $produk->meta_title ?? '')" />
         <x-forms.textarea-input required="" label="Meta Description" id="meta_description" name="meta_description" :value="old('meta_description', $produk->meta_description ?? '')" />

@@ -13,8 +13,8 @@ class ProdukKategori extends Model
 
     protected $guarded = [];
 
-    public function produklistkategori()
+    public function produks()
     {
-        return $this->hasMany(ProdukListkategori::class, 'produk_kategori_id');
+        return $this->belongsToMany(Produk::class, 'produk_listkategoris', 'produk_kategori_id', 'produk_id');
     }
 }

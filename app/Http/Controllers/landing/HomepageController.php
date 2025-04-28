@@ -9,6 +9,8 @@ use App\Models\landing\LandingControllview;
 use App\Models\landing\LandingMain;
 use App\Models\landing\LandingProses;
 use App\Models\landing\LandingVidio;
+use App\Models\postingan\Produk;
+use App\Models\postingan\ProdukKategori;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -21,7 +23,22 @@ class HomepageController extends Controller
         $landingvidio = LandingVidio::first();
         $landingproses = LandingProses::all();
         $landingcontrollview = LandingControllview::all();
-        return view('page_landing.homepage', compact('landingmain', 'landingcontact', 'landingabout', 'landingvidio', 'landingproses', 'landingcontrollview'));
+
+        $produks = Produk::all();
+        $produkkategoris = ProdukKategori::select('id', 'nama_kategori')->get();
+        return view(
+            'page_landing.homepage',
+            compact(
+                'landingmain',
+                'landingcontact',
+                'landingabout',
+                'landingvidio',
+                'landingproses',
+                'landingcontrollview',
+                'produks',
+                'produkkategoris',
+            )
+        );
     }
     public function about()
     {
@@ -43,5 +60,33 @@ class HomepageController extends Controller
         $landingcontact = LandingContact::first();
         $landingabout = LandingAbout::first();
         return view('page_landing.test', compact('landingmain', 'landingcontact', 'landingabout'));
+    }
+    public function produk($slug)
+    {
+        // Ambil produk berdasarkan slug
+        $produk = Produk::where('slug', $slug)->first();
+
+        // Jika produk tidak ditemukan, tampilkan halaman 404
+        if (!$produk) {
+            abort(404, 'Produk tidak ditemukan');
+        }
+
+        // Ambil kategori produk yang sedang dilihat
+        $kategoriIds = $produk->kategoris->pluck('id')->toArray();
+
+        // Cari produk lain yang sejenis berdasarkan kategori, kecuali produk yang sedang dilihat
+        $produksejenis = Produk::whereHas('kategoris', function ($query) use ($kategoriIds) {
+            $query->whereIn('produk_kategoris.id', $kategoriIds);
+        })->where('id', '!=', $produk->id) // Exclude the current product
+            ->limit(6) // Limit jumlah produk sejenis yang ditampilkan
+            ->get();
+
+        // Ambil data lainnya
+        $landingmain = LandingMain::first();
+        $landingcontact = LandingContact::first();
+        $landingabout = LandingAbout::first();
+
+        // Return view dengan data yang dibutuhkan
+        return view('page_landing.produk.detail', compact('landingmain', 'landingcontact', 'landingabout', 'produk', 'produksejenis'));
     }
 }
