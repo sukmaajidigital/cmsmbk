@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('telepon')->default('')->nullable();
             $table->string('alamat')->default('')->nullable();
             $table->string('email')->default('')->nullable();
-            $table->string('maps')->default('')->nullable();
+            $table->text('maps')->default('')->nullable();
             $table->timestamps();
         });
         Schema::create('landing_about', function (Blueprint $table) {
