@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerKategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeperluanController;
 use App\Http\Controllers\landing\HomepageController;
+use App\Http\Controllers\landing\LandingProdukController;
 use App\Http\Controllers\landing\SettingLandingController;
 use App\Http\Controllers\postingan\BlogController;
 use App\Http\Controllers\postingan\ProdukController;
@@ -19,20 +20,6 @@ use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
-
-Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-
-Route::controller(HomepageController::class)->group(function () {
-    Route::get('/', 'index')->name('landing.homepage');
-    Route::get('/about', 'about')->name('landing.about');
-    Route::get('/contact', 'contact')->name('landing.contact');
-    Route::get('/test', 'test')->name('landing.test');
-    Route::get('/{slug}', 'produk')->name('landing.produk');
-});
 
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth', 'role:0,1,2,3'])->group(function () {
@@ -139,8 +126,6 @@ Route::prefix('admin')->group(function () {
         Route::put('/supplier/{supplier}', [SupplierController::class, 'update'])->name('supplier.update');
         Route::delete('/supplier/{supplier}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
 
-
-
         // Bahan Masuk
         Route::get('/bahanmasuk', [BahanMasukController::class, 'index'])->name('bahanmasuk.index');
         Route::get('/bahanmasuk/export', [BahanMasukController::class, 'export'])->name('bahanmasuk.export');
@@ -150,7 +135,6 @@ Route::prefix('admin')->group(function () {
         Route::put('/bahanmasuk/{bahanmasuk}', [BahanMasukController::class, 'update'])->name('bahanmasuk.update');
         Route::delete('/bahanmasuk/{bahanmasuk}', [BahanMasukController::class, 'destroy'])->name('bahanmasuk.destroy');
         Route::get('/bahan/export-excel', [BahanController::class, 'exportExcel'])->name('bahan.exportExcel');
-
 
         // Bahan Keluar
         Route::get('/bahankeluar', [BahanKeluarController::class, 'index'])->name('bahankeluar.index');
@@ -162,3 +146,17 @@ Route::prefix('admin')->group(function () {
         Route::delete('/bahankeluar/{bahankeluar}', [BahanKeluarController::class, 'destroy'])->name('bahankeluar.destroy');
     });
 });
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
+Route::get('/', [HomepageController::class, 'index'])->name('landing.homepage');
+Route::get('/about', [HomepageController::class, 'about'])->name('landing.about');
+Route::get('/contact', [HomepageController::class, 'contact'])->name('landing.contact');
+Route::get('/test', [HomepageController::class, 'test'])->name('landing.test');
+
+Route::get('/produk', [LandingProdukController::class, 'indexproduk'])->name('landing.indexproduk');
+Route::get('/{slug}', [LandingProdukController::class, 'produkdetail'])->name('landing.produk');

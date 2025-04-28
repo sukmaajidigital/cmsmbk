@@ -12,6 +12,7 @@ use App\Models\landing\LandingVidio;
 use App\Models\postingan\Produk;
 use App\Models\postingan\ProdukKategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Dd;
 
@@ -19,37 +20,56 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
-        $landingmain = LandingMain::first();
-        $landingcontact = LandingContact::first();
-        $landingabout = LandingAbout::first();
-        $landingvidio = LandingVidio::first();
-        $landingproses = LandingProses::all();
-        $landingcontrollview = LandingControllview::all();
-        $produkkategoris = ProdukKategori::select('id', 'nama_kategori')->get();
+        $landingmain = Cache::remember('landingmain', 300, function () {
+            return LandingMain::first();
+        });
 
-        // --- Mulai efisien disini ---
+        $landingcontact = Cache::remember('landingcontact', 300, function () {
+            return LandingContact::first();
+        });
 
-        // Ambil semua produk ID grup by kategori
-        $produkKategoriList = DB::table('produk_listkategoris')
-            ->select('produk_kategori_id', 'produk_id')
-            ->join('produks', 'produks.id', '=', 'produk_listkategoris.produk_id')
-            ->orderBy('produks.created_at', 'desc') // ambil produk terbaru
-            ->get()
-            ->groupBy('produk_kategori_id');
+        $landingabout = Cache::remember('landingabout', 300, function () {
+            return LandingAbout::first();
+        });
 
-        $produkIds = collect();
+        $landingvidio = Cache::remember('landingvidio', 300, function () {
+            return LandingVidio::first();
+        });
 
-        foreach ($produkKategoriList as $produkKategoriId => $produkList) {
-            $produk = $produkList->first(); // Ambil satu produk terbaru per kategori
-            if ($produk) {
-                $produkIds->push($produk->produk_id);
+        $landingproses = Cache::remember('landingproses', 300, function () {
+            return LandingProses::all();
+        });
+
+        $landingcontrollview = Cache::remember('landingcontrollview', 300, function () {
+            return LandingControllview::all();
+        });
+
+        $produkkategoris = Cache::remember('produkkategoris', 300, function () {
+            return ProdukKategori::select('id', 'nama_kategori')->get();
+        });
+
+        // --- Produk dengan cache ---
+        $produks = Cache::remember('landingpage_produks', 300, function () {
+            $produkKategoriList = DB::table('produk_listkategoris')
+                ->select('produk_kategori_id', 'produk_id')
+                ->join('produks', 'produks.id', '=', 'produk_listkategoris.produk_id')
+                ->orderBy('produks.created_at', 'desc') // produk terbaru
+                ->get()
+                ->groupBy('produk_kategori_id');
+
+            $produkIds = collect();
+
+            foreach ($produkKategoriList as $produkKategoriId => $produkList) {
+                $produk = $produkList->first(); // Ambil satu produk terbaru per kategori
+                if ($produk) {
+                    $produkIds->push($produk->produk_id);
+                }
             }
-        }
 
-        // Ambil produk dari ID yang sudah terkumpul
-        $produks = Produk::whereIn('id', $produkIds->unique())->take(8)->get();
+            return Produk::whereIn('id', $produkIds->unique())->take(16)->get();
+        });
 
-        // --- Akhir optimasi ---
+        // --- End produk dengan cache ---
 
         return view(
             'page_landing.homepage',
@@ -85,33 +105,5 @@ class HomepageController extends Controller
         $landingcontact = LandingContact::first();
         $landingabout = LandingAbout::first();
         return view('page_landing.test', compact('landingmain', 'landingcontact', 'landingabout'));
-    }
-    public function produk($slug)
-    {
-        // Ambil produk berdasarkan slug
-        $produk = Produk::where('slug', $slug)->first();
-
-        // Jika produk tidak ditemukan, tampilkan halaman 404
-        if (!$produk) {
-            abort(404, 'Produk tidak ditasdasdasdaemukan');
-        }
-
-        // Ambil kategori produk yang sedang dilihat
-        $kategoriIds = $produk->kategoris->pluck('id')->toArray();
-
-        // Cari produk lain yang sejenis berdasarkan kategori, kecuali produk yang sedang dilihat
-        $produksejenis = Produk::whereHas('kategoris', function ($query) use ($kategoriIds) {
-            $query->whereIn('produk_kategoris.id', $kategoriIds);
-        })->where('id', '!=', $produk->id) // Exclude the current product
-            ->limit(6) // Limit jumlah produk sejenis yang ditampilkan
-            ->get();
-
-        // Ambil data lainnya
-        $landingmain = LandingMain::first();
-        $landingcontact = LandingContact::first();
-        $landingabout = LandingAbout::first();
-
-        // Return view dengan data yang dibutuhkan
-        return view('page_landing.produk.detail', compact('landingmain', 'landingcontact', 'landingabout', 'produk', 'produksejenis'));
     }
 }
