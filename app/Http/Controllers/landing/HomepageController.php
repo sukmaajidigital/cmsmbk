@@ -12,6 +12,8 @@ use App\Models\landing\LandingVidio;
 use App\Models\postingan\Produk;
 use App\Models\postingan\ProdukKategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class HomepageController extends Controller
 {
@@ -23,9 +25,32 @@ class HomepageController extends Controller
         $landingvidio = LandingVidio::first();
         $landingproses = LandingProses::all();
         $landingcontrollview = LandingControllview::all();
-
-        $produks = Produk::all();
         $produkkategoris = ProdukKategori::select('id', 'nama_kategori')->get();
+
+        // --- Mulai efisien disini ---
+
+        // Ambil semua produk ID grup by kategori
+        $produkKategoriList = DB::table('produk_listkategoris')
+            ->select('produk_kategori_id', 'produk_id')
+            ->join('produks', 'produks.id', '=', 'produk_listkategoris.produk_id')
+            ->orderBy('produks.created_at', 'desc') // ambil produk terbaru
+            ->get()
+            ->groupBy('produk_kategori_id');
+
+        $produkIds = collect();
+
+        foreach ($produkKategoriList as $produkKategoriId => $produkList) {
+            $produk = $produkList->first(); // Ambil satu produk terbaru per kategori
+            if ($produk) {
+                $produkIds->push($produk->produk_id);
+            }
+        }
+
+        // Ambil produk dari ID yang sudah terkumpul
+        $produks = Produk::whereIn('id', $produkIds->unique())->take(8)->get();
+
+        // --- Akhir optimasi ---
+
         return view(
             'page_landing.homepage',
             compact(
@@ -39,14 +64,6 @@ class HomepageController extends Controller
                 'produkkategoris',
             )
         );
-    }
-    public function getlistproduk(Request $request)
-    {
-        $produks = Produk::paginate(8); // Pastikan paginate sesuai kebutuhan
-        if ($request->ajax()) {
-            return view('page_landing.homepage.produklist', compact('produks'))->render();
-        }
-        return redirect()->route('landing.homepage');
     }
     public function about()
     {
