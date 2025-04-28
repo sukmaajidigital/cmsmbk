@@ -15,20 +15,20 @@ class ProdukSeeder extends Seeder
     {
         // Data kategori produk dan harga
         $categories = [
-            'Batik tulis variasi cap' => 350000,
-            'Sarung Batik' => 400000,
-            'Batik Cap Satu Warna' => 150000,
-            'Batik Cap Variasi Nitik' => 550000,
-            'Kaos' => 200000,
-            'Kemeja Batik' => 400000,
-            'Outer' => 600000,
-            'Slint Bag' => 100000,
-            'Syal Cotton Bamboo' => 350000,
+            'batik tulis variasi cap' => 350000,
+            'sarung batik' => 400000,
+            'batik cap satu warna' => 150000,
+            'batik cap variasi nitik' => 550000,
+            'kaos' => 200000,
+            'kemeja batik' => 400000,
+            'outer' => 600000,
+            'slint bag' => 100000,
+            'syal cotton bamboo' => 350000,
         ];
 
         // Data produk yang terkait dengan kategori
         $produkData = [
-            'Batik tulis variasi cap' => [
+            'batik tulis variasi cap' => [
                 'tari kretek',
                 'tembakau cengkeh',
                 'gading patiayam',
@@ -36,7 +36,7 @@ class ProdukSeeder extends Seeder
                 'parijotho pakis aji',
                 'tembakau parijotho',
                 'taburan tembakau',
-                'rumah kapal Menara',
+                'rumah kapal menara',
                 'gerbang k3',
                 'pakis haji',
                 'parijotho rejenu',
@@ -46,14 +46,14 @@ class ProdukSeeder extends Seeder
                 'cerita rakyat bulusan',
                 'diorama kretek',
             ],
-            'Sarung Batik' => ['lasem1', 'lasem2', 'kudusan1', 'kudusan2', 'klasik1', 'klasik2'],
-            'Batik Cap Satu Warna' => ['cengkeh', 'Gerbang K3', 'diorama kretek', 'tembakau parijotho', 'tembakau cengkeh', 'buket parijotho'],
-            'Batik Cap Variasi Nitik' => ['Buketan Parijotho', 'Buket Parijotho', 'Buket cengkeh', 'Gerbang K3', 'Gading Patiayam', 'Buket Kupu cengkeh'],
-            'Kaos' => ['Kaos 1', 'Kaos 2', 'Kaos 3', 'Kaos 4', 'Kaos 5', 'Kaos 6', 'Kaos 7'],
-            'Kemeja Batik' => ['Kemeja 1', 'Kemeja 2', 'Kemeja 3', 'Kemeja 4', 'Kemeja 5'],
-            'Outer' => ['Outer 1', 'Outer 2', 'Outer 3', 'Outer 4', 'Outer 5', 'Outer 6'],
-            'Slint Bag' => ['sb 1', 'sb 2', 'sb 3', 'sb 4', 'sb 5'],
-            'Syal Cotton Bamboo' => ['Syal 1', 'Syal 2', 'Syal 3', 'Syal 4', 'Syal 5'],
+            'sarung batik' => ['lasem1', 'lasem2', 'kudusan1', 'kudusan2', 'klasik1', 'klasik2'],
+            'batik cap satu warna' => ['cengkeh', 'gerbang k3', 'diorama kretek', 'tembakau parijotho', 'tembakau cengkeh', 'buket parijotho'],
+            'batik cap variasi nitik' => ['buketan parijotho', 'buket parijotho', 'buket cengkeh', 'gerbang k3', 'gading patiayam', 'buket kupu cengkeh'],
+            'kaos' => ['kaos 1', 'kaos 2', 'kaos 3', 'kaos 4', 'kaos 5', 'kaos 6', 'kaos 7'],
+            'kemeja batik' => ['kemeja 1', 'kemeja 2', 'kemeja 3', 'kemeja 4', 'kemeja 5'],
+            'outer' => ['outer 1', 'outer 2', 'outer 3', 'outer 4', 'outer 5', 'outer 6'],
+            'slint bag' => ['sb 1', 'sb 2', 'sb 3', 'sb 4', 'sb 5'],
+            'syal cotton bamboo' => ['syal 1', 'syal 2', 'syal 3', 'syal 4', 'syal 5'],
         ];
 
         // Insert kategori produk ke dalam tabel produk_kategoris
