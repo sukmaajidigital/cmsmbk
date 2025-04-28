@@ -26,7 +26,7 @@ class Landing extends Seeder
             'telepon' => '+62 811-2828-188',
             'alamat' => 'desa karangmalang rt 004 rw 002, kecamatan gebog, kabupaten kudus, provinsi jawa tengah',
             'email' => 'mbatikkudus@gmail.com',
-            'maps' => '@-6.7721234,110.8339916,374m',
+            'maps' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.797399489367!2d110.832489110015!3d-6.772255666197173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70db15bce5f05d%3A0x3c2a617369092d32!2sMuria%20Batik%20kudus!5e1!3m2!1sid!2sid!4v1745849648233!5m2!1sid!2sid',
         ]);
         // data about
         DB::table('landing_about')->insert([

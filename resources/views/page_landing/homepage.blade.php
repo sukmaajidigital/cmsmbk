@@ -21,9 +21,11 @@
             <nav class="navbar rounded-box bg-transparent flex justify-center mt-25">
                 <div class="navbar-center bg-transparent">
                     <ul class="menu menu-horizontal gap-2 p-0 bg-transparent font-semibold">
-                        <li class="bg-transparent hover:bg-base-100 rounded-full"><a href="{{ route('landing.about') }}" class="text-white hover:text-black">Product</a></li>
+                        <li class="bg-transparent hover:bg-base-100 rounded-full"><a href="{{ route('landing.indexproduk') }}" class="text-white hover:text-black">Product</a></li>
                         <li class="bg-transparent hover:bg-base-100 rounded-full"><a href="{{ route('landing.about') }}" class="text-white hover:text-black">About</a></li>
                         <li class="bg-transparent hover:bg-base-100 rounded-full"><a href="{{ route('landing.contact') }}" class="text-white hover:text-black">Contact</a></li>
+                        <li class="bg-transparent hover:bg-base-100 rounded-full"><a href="{{ route('landing.indexblog') }}" class="text-white hover:text-black">Blog</a></li>
+
                     </ul>
                 </div>
             </nav>

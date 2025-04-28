@@ -21,9 +21,10 @@
                     </ul>
                 </li> --}}
                 <li><a href="{{ route('landing.homepage') }}">Home</a></li>
+                <li><a href="{{ route('landing.indexproduk') }}">Produk</a></li>
                 <li><a href="{{ route('landing.about') }}">About</a></li>
                 <li><a href="{{ route('landing.contact') }}">Contact</a></li>
-                <li><a href="{{ route('landing.indexproduk') }}">Produk</a></li>
+                <li><a href="{{ route('landing.indexblog') }}">Blog</a></li>
             </ul>
         </div>
         <div class="navbar-end items-center gap-4">
@@ -44,9 +45,10 @@
                         </ul>
                     </li> --}}
                     <li><a href="{{ route('landing.homepage') }}">Home</a></li>
+                    <li><a href="{{ route('landing.indexproduk') }}">Produk</a></li>
                     <li><a href="{{ route('landing.about') }}">About</a></li>
                     <li><a href="{{ route('landing.contact') }}">Contact</a></li>
-                    <li><a href="{{ route('landing.indexproduk') }}">Produk</a></li>
+                    <li><a href="{{ route('landing.indexblog') }}">Blog</a></li>
                 </ul>
             </div>
             <a class="btn btn-primary" href="#">Login</a>

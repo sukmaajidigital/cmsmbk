@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerKategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeperluanController;
 use App\Http\Controllers\landing\HomepageController;
+use App\Http\Controllers\landing\LandingBlogController;
 use App\Http\Controllers\landing\LandingProdukController;
 use App\Http\Controllers\landing\SettingLandingController;
 use App\Http\Controllers\postingan\BlogController;
@@ -146,6 +147,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/bahankeluar/{bahankeluar}', [BahanKeluarController::class, 'destroy'])->name('bahankeluar.destroy');
     });
 });
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
@@ -157,6 +159,9 @@ Route::get('/', [HomepageController::class, 'index'])->name('landing.homepage');
 Route::get('/about', [HomepageController::class, 'about'])->name('landing.about');
 Route::get('/contact', [HomepageController::class, 'contact'])->name('landing.contact');
 Route::get('/test', [HomepageController::class, 'test'])->name('landing.test');
+
+Route::get('/blog', [LandingBlogController::class, 'index'])->name('landing.indexblog');
+Route::get('/blog/{slug}', [LandingBlogController::class, 'detail'])->name('landing.detailblog');
 
 Route::get('/produk', [LandingProdukController::class, 'indexproduk'])->name('landing.indexproduk');
 Route::get('/{slug}', [LandingProdukController::class, 'produkdetail'])->name('landing.produk');
