@@ -31,6 +31,7 @@ Route::controller(HomepageController::class)->group(function () {
     Route::get('/about', 'about')->name('landing.about');
     Route::get('/contact', 'contact')->name('landing.contact');
     Route::get('/test', 'test')->name('landing.test');
+    Route::get('/getlistproduk', 'getlistproduk')->name('getlistproduk'); // <-- Pastikan URL ini benar
     Route::get('/{slug}', 'produk')->name('landing.produk');
 });
 

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $landingmain = LandingMain::first();
         $landingcontact = LandingContact::first();
@@ -39,6 +39,14 @@ class HomepageController extends Controller
                 'produkkategoris',
             )
         );
+    }
+    public function getlistproduk(Request $request)
+    {
+        $produks = Produk::paginate(8); // Pastikan paginate sesuai kebutuhan
+        if ($request->ajax()) {
+            return view('page_landing.homepage.produklist', compact('produks'))->render();
+        }
+        return redirect()->route('landing.homepage');
     }
     public function about()
     {
@@ -68,7 +76,7 @@ class HomepageController extends Controller
 
         // Jika produk tidak ditemukan, tampilkan halaman 404
         if (!$produk) {
-            abort(404, 'Produk tidak ditemukan');
+            abort(404, 'Produk tidak ditasdasdasdaemukan');
         }
 
         // Ambil kategori produk yang sedang dilihat

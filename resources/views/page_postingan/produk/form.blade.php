@@ -1,21 +1,10 @@
 <div class="grid grid-cols-2 gap-6">
     <div>
-        {{-- Nama Produk --}}
         <x-forms.text-input required="required" label="Nama Produk" id="name" name="name" :value="old('name', $produk->name ?? '')" />
-
-        {{-- slug --}}
         <x-forms.text-input required="" label="Slug" id="slug" name="slug" :value="old('slug', $produk->slug ?? '')" />
-
-        {{-- Stok --}}
         <x-forms.text-input required="required" label="Stok" id="stock" name="stock" type="number" :value="old('stock', $produk->stock ?? '')" />
-
-        {{-- Harga --}}
         <x-forms.text-input required="required" label="Harga" id="harga" name="harga" type="number" :value="old('harga', $produk->harga ?? '')" />
-
-        {{-- SKU --}}
         <x-forms.text-input required="" label="SKU" id="sku" name="sku" :value="old('sku', $produk->sku ?? '')" />
-
-        {{-- Gambar (optional upload) --}}
         <x-forms.text-input required="" type="file" label="Gambar Produk" id="image" name="image" :value="old('image', $produk->image ?? '')" />
         {{-- Preview Gambar --}}
         <div class="mt-4">

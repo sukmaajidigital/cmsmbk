@@ -5,26 +5,44 @@
                 {{ \App\Models\landing\LandingControllview::value('produk_title') }}
             </h2>
         </div>
-        <div class="px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-6 gap-4 md:px-10 hover:overflow-y-hidden">
-            @foreach ($produks as $produk)
-                <div class="rounded-lg transition-transform transform hover:scale-105 overflow-hidden">
-                    <img src="{{ asset('storage/' . $produk->image) }}" alt="{{ $produk->name }}" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="flex items-center gap-2 text-xl font-bold">{{ $produk->name }}</h3>
-                        <p class="text-sm mt-1 line-clamp-2 border-b pb-2 text-left">
-                            {{ \Illuminate\Support\Str::limit($produk->description, 50) }}
-                        </p>
-                        <div class="flex items-center justify-between mt-2">
-                            <p class="text-lg text-base-content font-bold text-left">
-                                Rp {{ number_format($produk->harga, 0, ',', '.') }}
-                            </p>
-                            <a href="{{ route('landing.produk', $produk->slug) }}" class="bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-primary-dark transition">
-                                Detail
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+        <div id="produk-container">
+            <div class="text-center py-10">Loading produk...</div>
         </div>
     </section>
 @endif
+
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function loadProduk(url = "{{ route('getlistproduk') }}") {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'html',
+                beforeSend: function() {
+                    $('#produk-container').html('<div class="text-center py-10">Loading...</div>');
+                },
+                success: function(response) {
+                    $('#produk-container').html(response);
+                },
+                error: function(xhr) {
+                    console.error('Gagal memuat produk:', xhr.responseText);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            loadProduk(); // Load pertama kali saat halaman dibuka
+        });
+
+        // Ketika klik link pagination
+        $(document).on('click', '#produk-container .pagination a', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            if (url) {
+                loadProduk(url); // Memanggil fungsi loadProduk dengan URL baru
+            }
+        });
+    </script>
+@endpush
