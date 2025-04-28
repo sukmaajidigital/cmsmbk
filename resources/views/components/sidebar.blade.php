@@ -143,7 +143,7 @@
         </ul>
     </div>
 
-    <!-- Footer User (Tetap di bawah) -->
+    {{-- <!-- Footer User (Tetap di bawah) --> --}}
     <div class="dropdown relative inline-flex rtl:[--placement:bottom-end] justify-center px-4 py-10">
         <button id="dropdown-avatar" type="button" class="dropdown-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
             <li class="dropdown-header gap-3">
@@ -185,6 +185,15 @@
                         <span class="icon-[tabler--logout] size-4"></span>Logout
                     </a>
                 </form>
+                {{-- <a href="#" onclick="signOut();">Sign out</a> --}}
+                {{-- <script>
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function() {
+                            console.log('User signed out.');
+                        });
+                    }
+                </script> --}}
             </li>
         </ul>
     </div>

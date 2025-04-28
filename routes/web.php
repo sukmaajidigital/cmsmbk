@@ -23,6 +23,9 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 Route::controller(HomepageController::class)->group(function () {
     Route::get('/', 'index')->name('landing.homepage');
     Route::get('/about', 'about')->name('landing.about');

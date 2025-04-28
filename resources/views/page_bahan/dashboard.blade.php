@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body d-flex align-items-center">
-                            <!-- Profile Circle -->
+                            {{-- <!-- Profile Circle --> --}}
                             <div class="me-3" style="width: 60px; height: 60px; border-radius: 50%; background-color: #ffc107; display: flex; justify-content: center; align-items: center; font-size: 24px; color: #fff; font-weight: bold;">
                                 {{ substr(Str::upper(Auth::user()->nama_user), 0, 1) }}
                             </div>

@@ -3,7 +3,7 @@
     <p class="mt-4 text-lg">{{ \App\Models\landing\LandingControllview::value('proses_subtitle') }}</p>
 
     <div class="w-full mt-6 relative flex items-center justify-center">
-        <!-- Tombol kiri -->
+        {{-- <!-- Tombol kiri --> --}}
         <button id="prevBtn" class="left-0 z-10 p-2 text-black rounded-full">❮</button>
 
         {{-- Container gambar --}}
@@ -27,7 +27,7 @@
                 @endforeach
             </div>
         </div>
-        <!-- Tombol kanan -->
+        {{-- <!-- Tombol kanan --> --}}
         <button id="nextBtn" class="right-0 z-10 p-2 text-black rounded-full">❯</button>
     </div>
     <script>
@@ -79,7 +79,8 @@
         setItemWidths(); // Init
     </script>
     <br>
-    <div class="mt-20 relative w-screen h-[30vh] overflow-hidden"> <!-- Container dengan rasio 10x3 -->
+    <div class="mt-20 relative w-screen h-[30vh] overflow-hidden">
+        {{-- <!-- Container dengan rasio 10x3 --> --}}
         <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop playsinline>
             <source src="{{ optional($landingvidio)->vidio ? asset('storage/' . $landingvidio->vidio) : 'https://via.placeholder.com/150' }}" type="video/mp4">
         </video>

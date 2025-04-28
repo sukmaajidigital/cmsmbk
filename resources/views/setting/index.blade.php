@@ -12,7 +12,7 @@
         </div>
     </div> --}}
     <div class="flex flex-col md:flex-row gap-6 p-6">
-        <!-- Card Kiri (Form Setting) -->
+        {{-- <!-- Card Kiri (Form Setting) --> --}}
         <div class="w-full md:w-3/5 rounded-2xl p-6">
             <h5 class="text-xl font-semibold mb-4">Setting</h5>
             <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
@@ -36,7 +36,7 @@
             </form>
         </div>
 
-        <!-- Card Kanan (Tampilan Foto) -->
+        {{-- <!-- Card Kanan (Tampilan Foto) --> --}}
         <div class="w-full md:w-2/5 rounded-2xl p-6 flex flex-col">
             <h5 class="text-xl font-semibold mb-4">Icon Image</h5>
             @if (!empty($setting->icon))

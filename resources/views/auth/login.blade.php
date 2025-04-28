@@ -19,7 +19,24 @@
                 <div class="justify-end">
                     <x-button.signin> Sign In </x-button.signin>
                 </div>
+                <div class="flex items-center justify-center w-full">
+                    {{-- <a href="{{ route('google.login') }}" class="btn btn-google w-full">
+                        <i class="fab fa-google mr-2"></i> Login dengan Google
+                    </a> --}}
+
+                </div>
             </form>
         </div>
     </div>
+    @push('script')
+        {{-- <script>
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            }
+        </script> --}}
+    @endpush
 </x-guest>

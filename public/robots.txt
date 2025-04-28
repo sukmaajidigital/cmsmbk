@@ -1,2 +1,8 @@
 User-agent: *
 Disallow:
+Disallow: /admin/
+
+# Allow everything else
+Allow: /
+
+Sitemap: https://muriabatik.com.muriabatikkudus.com/sitemap.xml

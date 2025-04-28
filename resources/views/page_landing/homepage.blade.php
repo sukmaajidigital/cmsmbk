@@ -1,16 +1,20 @@
 <x-landinglayoutshomepage>
-
     <x-slot name="meta">
-        <meta name="keywords" content="{{ $landingmain->longname }}">
-        <meta name="author" content="{{ $landingmain->longname }}">
+        <meta name="keywords" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }}, {{ $landingmain->longname }}, {{ $landingmain->shortname }}">
+        <meta name="author" content="admin">
         <meta name="description" content="{{ $landingmain->longname }}">
+        <meta name="twitter:title" content="{{ $landingmain->longname }}">
+        <meta name="twitter:description" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }} ">
+        <meta name="twitter:image" content="{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}">
+        <meta property="og:image" content="{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}">
+        <meta property="og:description" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }} ">
     </x-slot>
     <x-slot name="subname">
         Home
     </x-slot>
     <section class="relative w-screen h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}');">
         <div class="w-screen h-screen flex flex-col items-center justify-center bg-base-content bg-opacity-50 p-10 text-center text-white rounded-lg">
-            <img src="{{ asset('storage/' . \App\Models\landing\LandingMain::value('logo')) }}" alt="logo" aria-placeholder="logo" class="w-40 object-cover md:w-48 mb-7">
+            <img src="{{ asset('storage/' . \App\Models\landing\LandingMain::value('logo')) }}" alt="logo" aria-placeholder="logo" class="w-40 object-cover md:w-48 mb-7 mt-40">
             <h1 class="text-5xl font-bold">{{ \App\Models\landing\LandingControllview::value('hero_tagline') }}</h1>
             <p class="mt-4 text">{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }}</p>
             <button class="mt-6 px-6 py-3 bg-primary text-white rounded-full text-lg">{{ \App\Models\landing\LandingControllview::value('hero_button') }}</button>

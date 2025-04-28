@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('featured_image_alt')->nullable();
 
             // Additional
-            $table->foreignId('author_id')->constrained('users')->onDelete('set null')->nullable();
+            // $table->foreignId('author_id')->constrained('users')->onDelete('set null')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
 
