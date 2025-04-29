@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Excel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class ProdukController extends Controller
 {
@@ -36,7 +38,6 @@ class ProdukController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // dd($request);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
@@ -52,38 +53,60 @@ class ProdukController extends Controller
             'meta_keywords' => 'nullable|string',
             'produk_kategori_id' => 'required|array',
             'produk_kategori_id.*' => 'exists:produk_kategoris,id',
-            'image' => 'nullable|image|max:2048', // tambahkan validasi file
+            'image' => 'nullable',
         ]);
-        try {
-            if ($request->hasFile('image')) {
-                $validated['image'] = $request->file('image')->store('imageproduk', 'public');
+
+        // try {
+        if ($request->hasFile('image')) {
+            $imageFile = $request->file('image');
+            $manager = new ImageManager(new GdDriver());
+
+            $image = $manager->read($imageFile->getRealPath())
+                ->scaleDown(width: 900, height: 900);
+
+            // Nama file unik
+            $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+
+            // Pastikan direktori ada
+            $directory = storage_path('app/public/imageproduk');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
             }
-            // Buat produk langsung
-            $produk = Produk::create([
-                'name' => $validated['name'],
-                'slug' => $validated['slug'],
-                'description' => $validated['description'] ?? null,
-                'harga' => $validated['harga'],
-                'stock' => $validated['stock'],
-                'sku' => $validated['sku'] ?? null,
-                'image' => $validated['image'] ?? null,
-                'shopee' => $validated['shopee'] ?? null,
-                'tokped' => $validated['tokped'] ?? null,
-                'tiktokshop' => $validated['tiktokshop'] ?? null,
-                'meta_title' => $validated['meta_title'] ?? null,
-                'meta_description' => $validated['meta_description'] ?? null,
-                'meta_keywords' => $validated['meta_keywords'] ?? null,
-            ]);
 
-            // Langsung attach kategori pakai relasi
-            $produk->kategoris()->attach($validated['produk_kategori_id']);
+            // Path simpan file
+            $path = $directory . '/' . $filename;
 
-            return redirect()->route('produk.index')->with('success', 'Produk berhasil dibuat.');
-        } catch (\Exception $e) {
-            return back()
-                ->withInput()
-                ->withErrors('Gagal membuat produk. ' . $e->getMessage());
+            // Simpan dengan kualitas 70%
+            $image->save($path, quality: 70);
+
+            // Simpan path relatif untuk database
+            $validated['image'] = 'imageproduk/' . $filename;
         }
+
+        $produk = Produk::create([
+            'name' => $validated['name'],
+            'slug' => $validated['slug'],
+            'description' => $validated['description'] ?? null,
+            'harga' => $validated['harga'],
+            'stock' => $validated['stock'],
+            'sku' => $validated['sku'] ?? null,
+            'image' => $validated['image'] ?? null,
+            'shopee' => $validated['shopee'] ?? null,
+            'tokped' => $validated['tokped'] ?? null,
+            'tiktokshop' => $validated['tiktokshop'] ?? null,
+            'meta_title' => $validated['meta_title'] ?? null,
+            'meta_description' => $validated['meta_description'] ?? null,
+            'meta_keywords' => $validated['meta_keywords'] ?? null,
+        ]);
+
+        $produk->kategoris()->attach($validated['produk_kategori_id']);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dibuat.');
+        // } catch (\Exception $e) {
+        //     return back()
+        //         ->withInput()
+        //         ->withErrors('Gagal membuat produk. ' . $e->getMessage());
+        // }
     }
 
     public function edit(Produk $produk): View
@@ -155,28 +178,28 @@ class ProdukController extends Controller
         return to_route('produk.index')->with('success', 'bahan Deleted successfully.');
     }
 
-    public function variasicreate(Produk $produk)
-    {
-        return view('page_postingan.produk.createvariasi', compact('produk'));
-    }
+    // public function variasicreate(Produk $produk)
+    // {
+    //     return view('page_postingan.produk.createvariasi', compact('produk'));
+    // }
 
-    public function variasistore(Request $request, Produk $produk)
-    {
-        $request->validate([
-            'nama_variation' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+    // public function variasistore(Request $request, Produk $produk)
+    // {
+    //     $request->validate([
+    //         'nama_variation' => 'required|string|max:255',
+    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //     ]);
 
-        // Menyimpan gambar
-        $imagePath = $request->file('image')->store('produk_variasi_images', 'public');
+    //     // Menyimpan gambar
+    //     $imagePath = $request->file('image')->store('produk_variasi_images', 'public');
 
-        // Menyimpan variasi produk
-        ProdukVariasi::create([
-            'produk_id' => $produk->id,
-            'nama_variation' => $request->nama_variation,
-            'image' => $imagePath,
-        ]);
+    //     // Menyimpan variasi produk
+    //     ProdukVariasi::create([
+    //         'produk_id' => $produk->id,
+    //         'nama_variation' => $request->nama_variation,
+    //         'image' => $imagePath,
+    //     ]);
 
-        return redirect()->route('page_postingan.produk.index', $produk->id)->with('success', 'Variasi produk berhasil ditambahkan!');
-    }
+    //     return redirect()->route('page_postingan.produk.index', $produk->id)->with('success', 'Variasi produk berhasil ditambahkan!');
+    // }
 }

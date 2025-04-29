@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             Landing::class,
             ProdukSeeder::class,
-            BlogSeeder::class,
+            // BlogSeeder::class,
         ]);
     }
 }
