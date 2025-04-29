@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\postingan\Blog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -19,9 +21,10 @@ class BlogController extends Controller
     }
     public function index(): View
     {
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('updated_at', 'desc')->get();
         return view('page_postingan.blog.index', compact('blogs'));
     }
+
 
     public function create(): View
     {
@@ -30,53 +33,50 @@ class BlogController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // dd($request);
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'harga' => 'required|integer',
-            'stock' => 'required|integer',
-            'sku' => 'nullable|string',
-            'shopee' => 'nullable|string',
-            'tokped' => 'nullable|string',
-            'tiktokshop' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'content' => 'required|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
-            'produk_kategori_id' => 'required|array',
-            'produk_kategori_id.*' => 'exists:produk_kategoris,id',
-            'image' => 'nullable|image|max:2048', // tambahkan validasi file
+            'featured_image' => 'nullable|file',
+            'is_published' => 'required|boolean',
+            'published_at' => 'nullable|date',
         ]);
+
         try {
-            if ($request->hasFile('image')) {
-                $validated['image'] = $request->file('image')->store('imageproduk', 'public');
+            $featuredImagePath = null;
+
+            if ($request->hasFile('featured_image')) {
+                $featuredImagePath = $request->file('featured_image')->store('blog_images', 'public');
             }
-            // Buat produk langsung
-            $blog = Blog::create([
-                'name' => $validated['name'],
-                'slug' => $validated['slug'],
-                'description' => $validated['description'] ?? null,
-                'harga' => $validated['harga'],
-                'stock' => $validated['stock'],
-                'sku' => $validated['sku'] ?? null,
-                'image' => $validated['image'] ?? null,
-                'shopee' => $validated['shopee'] ?? null,
-                'tokped' => $validated['tokped'] ?? null,
-                'tiktokshop' => $validated['tiktokshop'] ?? null,
-                'meta_title' => $validated['meta_title'] ?? null,
-                'meta_description' => $validated['meta_description'] ?? null,
-                'meta_keywords' => $validated['meta_keywords'] ?? null,
-            ]);
 
-            // Langsung attach kategori pakai relasi
-            $blog->kategoris()->attach($validated['produk_kategori_id']);
+            $blog = new Blog();
+            $blog->title = $validated['title'];
+            $blog->slug = $validated['slug'];
+            $blog->excerpt = $validated['meta_description'] ?? null;
+            $blog->content = $validated['content'];
+            $blog->meta_title = $validated['meta_title'] ?? null;
+            $blog->meta_description = $validated['meta_description'] ?? null;
+            $blog->meta_keywords = $validated['meta_keywords'] ?? null;
+            $blog->canonical_url = $validated['slug'] ?? null;
+            $blog->og_title = $validated['title'] ?? null;
+            $blog->og_description = $validated['meta_description'] ?? null;
+            $blog->featured_image = $featuredImagePath;
+            $blog->featured_image_alt = $validated['slug'] ?? null;
+            $blog->og_image = $featuredImagePath;
+            $blog->is_published = $validated['is_published'];
+            $blog->published_at = $validated['published_at'] ?? null;
+            $blog->user_id = Auth::id();
 
-            return redirect()->route('blog.index')->with('success', 'Produk berhasil dibuat.');
+            $blog->save();
+
+            return redirect()->route('blog.index')->with('success', 'Blog berhasil disimpan.');
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->withErrors('Gagal membuat produk. ' . $e->getMessage());
+                ->withErrors('Gagal menyimpan blog. ' . $e->getMessage());
         }
     }
 
@@ -87,59 +87,51 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'harga' => 'required|integer',
-            'stock' => 'required|integer',
-            'sku' => 'nullable|string',
-            'shopee' => 'nullable|string',
-            'tokped' => 'nullable|string',
-            'tiktokshop' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:blogs,slug,' . $blog->id,
+            'excerpt' => 'nullable|string',
+            'content' => 'required|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
-            'produk_kategori_id' => 'required|array',
-            'produk_kategori_id.*' => 'exists:produk_kategoris,id',
-            'image' => 'nullable|image|max:2048',
+            'canonical_url' => 'nullable|string|max:255',
+            'og_title' => 'nullable|string|max:255',
+            'og_description' => 'nullable|string',
+            'featured_image' => 'nullable|image|max:2048',
+            'featured_image_alt' => 'nullable|string|max:255',
+            'og_image' => 'nullable|image|max:2048',
+            'is_published' => 'required|boolean',
+            'published_at' => 'nullable|date',
         ]);
+
         DB::beginTransaction();
         try {
-            if ($request->hasFile('image')) {
-                // Hapus gambar lama kalau ada
-                if ($blog->image) {
-                    Storage::disk('public')->delete($blog->image);
+            if ($request->hasFile('featured_image')) {
+                if ($blog->featured_image) {
+                    Storage::disk('public')->delete($blog->featured_image);
                 }
-                // Upload gambar baru
-                $validated['image'] = $request->file('image')->store('imageproduk', 'public');
+                $validated['featured_image'] = $request->file('featured_image')->store('blog_images', 'public');
             }
-            // Update produk
-            $blog->update([
-                'name' => $validated['name'],
-                'slug' => $validated['slug'],
-                'description' => $validated['description'] ?? null,
-                'harga' => $validated['harga'],
-                'stock' => $validated['stock'],
-                'sku' => $validated['sku'] ?? null,
-                'image' => $validated['image'] ?? $blog->image,
-                'shopee' => $validated['shopee'] ?? null,
-                'tokped' => $validated['tokped'] ?? null,
-                'tiktokshop' => $validated['tiktokshop'] ?? null,
-                'meta_title' => $validated['meta_title'] ?? null,
-                'meta_description' => $validated['meta_description'] ?? null,
-                'meta_keywords' => $validated['meta_keywords'] ?? null,
-            ]);
-            // Update kategori: sync akan replace otomatis (hapus yang lama, pasang yang baru)
-            $blog->kategoris()->sync($validated['produk_kategori_id']);
+
+            if ($request->hasFile('og_image')) {
+                if ($blog->og_image) {
+                    Storage::disk('public')->delete($blog->og_image);
+                }
+                $validated['og_image'] = $request->file('og_image')->store('blog_og_images', 'public');
+            }
+
+            $blog->update($validated);
+
             DB::commit();
-            return redirect()->route('blog.index')->with('success', 'Produk berhasil diperbarui.');
+            return redirect()->route('blog.index')->with('success', 'Blog berhasil diperbarui.');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()
                 ->withInput()
-                ->withErrors('Gagal memperbarui produk. ' . $e->getMessage());
+                ->withErrors('Gagal memperbarui blog. ' . $e->getMessage());
         }
     }
+
     public function destroy(Blog $blog)
     {
         $blog->delete();

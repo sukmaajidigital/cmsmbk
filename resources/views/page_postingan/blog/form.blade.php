@@ -1,15 +1,19 @@
 <link rel="stylesheet" href="{{ asset('richtexteditor/richtexteditor/rte_theme_default.css') }}" />
-<div class="grid grid-cols-2 gap-6">
+{{-- Judul --}}
+<x-forms.text-input required="required" label="Judul Blog" id="title" name="title" :value="old('title', $blog->title ?? '')" />
+{{-- Slug --}}
+<x-forms.text-input required="required" label="Slug" id="slug" name="slug" :value="old('slug', $blog->slug ?? '')" />
+{{-- Konten --}}
+<x-forms.textarea-input required="" label="Konten" id="text_editor" name="content" :value="old('content', $blog->content ?? '')" />
+{{-- Semua lainnya dibagi 2 kolom --}}
+<div class="grid grid-cols-2 gap-6 mt-6">
     <div>
-        {{-- Judul Blog --}}
-        <x-forms.text-input required="required" label="Judul Blog" id="title" name="title" :value="old('title', $blog->title ?? '')" />
-
-        {{-- Slug --}}
-        <x-forms.text-input required="required" label="Slug" id="slug" name="slug" :value="old('slug', $blog->slug ?? '')" />
-
-        {{-- Excerpt --}}
-        <x-forms.textarea-input required="" label="Ringkasan (Excerpt)" id="excerpt" name="excerpt" :value="old('excerpt', $blog->excerpt ?? '')" />
-
+        {{-- SEO Fields --}}
+        <x-forms.text-input required="" label="Meta Title" id="meta_title" name="meta_title" :value="old('meta_title', $blog->meta_title ?? '')" />
+        <x-forms.textarea-input required="" label="Meta Description" id="meta_description" name="meta_description" :value="old('meta_description', $blog->meta_description ?? '')" />
+        <x-forms.text-input required="" label="Meta Keywords" id="meta_keywords" name="meta_keywords" :value="old('meta_keywords', $blog->meta_keywords ?? '')" />
+    </div>
+    <div>
         {{-- Gambar Utama --}}
         <x-forms.text-input required="" type="file" label="Gambar Utama" id="featured_image" name="featured_image" :value="old('featured_image', $blog->featured_image ?? '')" />
 
@@ -21,7 +25,6 @@
                 <img id="image-preview" src="#" alt="Preview Gambar" class="w-32 h-32 object-cover rounded hidden">
             @endif
         </div>
-
         <script>
             function previewImage(event) {
                 const imagePreview = document.getElementById('image-preview');
@@ -33,28 +36,6 @@
             }
             document.getElementById('featured_image').addEventListener('change', previewImage);
         </script>
-
-        {{-- Alt Text Gambar --}}
-        <x-forms.text-input required="" label="Alt Text Gambar" id="featured_image_alt" name="featured_image_alt" :value="old('featured_image_alt', $blog->featured_image_alt ?? '')" />
-
-        {{-- SEO Fields --}}
-        <x-forms.text-input required="" label="Meta Title" id="meta_title" name="meta_title" :value="old('meta_title', $blog->meta_title ?? '')" />
-        <x-forms.textarea-input required="" label="Meta Description" id="meta_description" name="meta_description" :value="old('meta_description', $blog->meta_description ?? '')" />
-        <x-forms.text-input required="" label="Meta Keywords" id="meta_keywords" name="meta_keywords" :value="old('meta_keywords', $blog->meta_keywords ?? '')" />
-        <x-forms.text-input required="" label="Canonical URL" id="canonical_url" name="canonical_url" :value="old('canonical_url', $blog->canonical_url ?? '')" />
-        <x-forms.text-input required="" label="OG Title" id="og_title" name="og_title" :value="old('og_title', $blog->og_title ?? '')" />
-        <x-forms.textarea-input required="" label="OG Description" id="og_description" name="og_description" :value="old('og_description', $blog->og_description ?? '')" />
-        <x-forms.text-input required="" type="file" label="OG Image" id="og_image" name="og_image" :value="old('og_image', $blog->og_image ?? '')" />
-    </div>
-
-    <div>
-        {{-- Konten Blog --}}
-        {{-- <div class="mb-3">
-            <label for="content" class="form-label">Konten</label>
-            <textarea name="content" id="text_editor" rows="10">{{ old('content', $blog->content ?? '') }}</textarea>
-        </div> --}}
-        <x-forms.textarea-input required="" label="Konten" id="text_editor" name="content" :value="old('content', $blog->content ?? '')" />
-
         {{-- Status Publish --}}
         <div class="mt-4">
             <label for="is_published" class="label label-text">Status Publikasi</label>
@@ -63,10 +44,8 @@
                 <option value="0" {{ old('is_published', $blog->is_published ?? '') == 0 ? 'selected' : '' }}>Draft</option>
             </select>
         </div>
-
-        {{-- Published At (Optional) --}}
-        <x-forms.text-input required="" type="datetime-local" label="Tanggal Publish" id="published_at" name="published_at" :value="old('published_at', isset($blog->published_at) ? $blog->published_at->format('Y-m-d\TH:i') : '')" />
-
+        {{-- Published At --}}
+        <x-forms.text-input required="" type="datetime" label="Tanggal Publish" id="published_at" name="published_at" :value="old('published_at', isset($blog->published_at) ? $blog->published_at : '')" />
     </div>
 </div>
 <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/rte.js') }}"></script>

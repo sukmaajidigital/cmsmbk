@@ -24,3 +24,6 @@ yarn-error.log
 database/database.sqlite
 /storage/app/public/imageproduk
 /storage/app/public/images
+# /storage/app/public/images
+/storage/app/public/blog_og_images
+/storage/app/public/blog_images
