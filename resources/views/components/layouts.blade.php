@@ -38,6 +38,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('assets/datatable/datatable.css') }}" />
     <link rel="stylesheet" href="{{ asset('custom/responsive.css') }}" />
+    @stack('style')
 </head>
 
 <body class="flex flex-col min-h-screen">

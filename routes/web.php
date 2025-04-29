@@ -49,6 +49,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('postingan')->group(function () {
             Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
             Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+            Route::post('/blogimage/upload', [BlogController::class, 'upload'])->name('image.upload');
             Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
             Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('blog.edit');
             Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('blog.update');
