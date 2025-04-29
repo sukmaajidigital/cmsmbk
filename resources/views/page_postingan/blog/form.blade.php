@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('plugins/richtexteditor/rte_theme_default.css') }}" />
+<link rel="stylesheet" href="{{ asset('richtexteditor/richtexteditor/rte_theme_default.css') }}" />
 <div class="grid grid-cols-2 gap-6">
     <div>
         {{-- Judul Blog --}}
@@ -69,8 +69,8 @@
 
     </div>
 </div>
-<script type="text/javascript" src="{{ asset('plugins/richtexteditor/rte.js') }}"></script>
-<script type="text/javascript" src="{{ asset('plugins/richtexteditor/plugins/all_plugins.js') }}"></script>
+<script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/rte.js') }}"></script>
+<script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/plugins/all_plugins.js') }}"></script>
 <script>
     var config = {};
 
