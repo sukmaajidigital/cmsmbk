@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -44,13 +47,23 @@ class BlogController extends Controller
             'is_published' => 'required|boolean',
             'published_at' => 'nullable|date',
         ]);
-
+        $manager = new ImageManager(new Driver());
         try {
-            $featuredImagePath = null;
+            $upload = $request->file('featured_image');
+            // $width = $manager->read($upload)->width() / $angka;
+            // $height = $manager->read($upload)->height() / $angka;
 
-            if ($request->hasFile('featured_image')) {
-                $featuredImagePath = $request->file('featured_image')->store('blog_images', 'public');
-            }
+            $filename = now()->timestamp . '.' . $upload->getClientOriginalExtension();
+            $path = 'blog_images/' . $filename;
+
+            $image = Image::read($upload)
+                ->scaleDown(width: 900, height: 900) // NEK LUWEH 900 PX
+                ->encodeByExtension($upload->getClientOriginalExtension(), quality: 100); // Tambahkan encode dan kualitas kompresi
+
+            Storage::disk('public')->put($path, $image);
+            // if ($request->hasFile('featured_image')) {
+            //     $featuredImagePath = $request->file('featured_image')->store('blog_images', 'public');
+            // }
 
             $blog = new Blog();
             $blog->title = $validated['title'];
@@ -63,9 +76,9 @@ class BlogController extends Controller
             $blog->canonical_url = $validated['slug'] ?? null;
             $blog->og_title = $validated['title'] ?? null;
             $blog->og_description = $validated['meta_description'] ?? null;
-            $blog->featured_image = $featuredImagePath;
+            $blog->featured_image = $path;
             $blog->featured_image_alt = $validated['slug'] ?? null;
-            $blog->og_image = $featuredImagePath;
+            $blog->og_image = $path;
             $blog->is_published = $validated['is_published'];
             $blog->published_at = $validated['published_at'] ?? null;
             $blog->user_id = Auth::id();

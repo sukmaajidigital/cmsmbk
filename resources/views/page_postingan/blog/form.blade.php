@@ -45,7 +45,7 @@
             </select>
         </div>
         {{-- Published At --}}
-        <x-forms.text-input required="" type="datetime" label="Tanggal Publish" id="published_at" name="published_at" :value="old('published_at', isset($blog->published_at) ? $blog->published_at : '')" />
+        <x-forms.text-input required="" type="date" label="Tanggal Publish" id="published_at" name="published_at" :value="old('published_at', isset($blog->published_at) ? $blog->published_at : '')" />
     </div>
 </div>
 <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/rte.js') }}"></script>
