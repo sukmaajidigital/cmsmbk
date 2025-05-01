@@ -74,7 +74,7 @@ class ProdukSeeder extends Seeder
                         'harga' => $harga,
                         'stock' => 20,
                         'sku' => "$produkSlug",
-                        'image' => "masterimage/$categoryName/$productName.jpg",
+                        'image' => "masterimagee/$categoryName/$productName.jpg",
                         'shopee' => "https://shopee.co.id/$productName",
                         'tokped' => "https://tokopedia.com/$productName",
                         'tiktokshop' => "https://tiktokshop.com/$productName",
