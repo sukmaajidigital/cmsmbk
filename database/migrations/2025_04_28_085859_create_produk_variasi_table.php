@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produk_variasi', function (Blueprint $table) {
+        Schema::create('produk_variasis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produk_id');
             $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->string('nama_variation');
+            $table->string('nama_variasi');
             $table->string('image');  // Menyimpan path gambar variasi
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produk_variasi');
+        Schema::dropIfExists('produk_variasis');
     }
 };

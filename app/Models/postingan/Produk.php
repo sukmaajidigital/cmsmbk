@@ -18,7 +18,7 @@ class Produk extends Model
     {
         return $this->belongsToMany(ProdukKategori::class, 'produk_listkategoris', 'produk_id', 'produk_kategori_id');
     }
-    public function variasis()
+    public function variasi()
     {
         return $this->hasMany(ProdukVariasi::class, 'produk_id');
     }

@@ -9,11 +9,7 @@ class ProdukVariasi extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'produk_id',
-        'nama_variation',
-        'image'
-    ];
+    protected $guarded = [];
 
     public function produk()
     {
