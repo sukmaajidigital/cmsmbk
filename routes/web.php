@@ -18,6 +18,7 @@ use App\Http\Controllers\postingan\ProdukController;
 use App\Http\Controllers\postingan\ProdukKategoriController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SupplierController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 
@@ -69,11 +70,9 @@ Route::prefix('admin')->group(function () {
             Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
             Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
-            // Menampilkan form untuk menambah variasi
-            Route::get('produk/{produk}/variasi/create', [ProdukController::class, 'create'])->name('produk.variasi.create');
-
-            // Menyimpan variasi produk
-            Route::post('produk/{produk}/variasi', [ProdukController::class, 'store'])->name('produk.variasi.store');
+            // add variasi produk
+            Route::get('produk/{produk}/variasi/update', [ProdukController::class, 'variasi'])->name('produk.variasi.update');
+            Route::post('produk/{produk}/variasi', [ProdukController::class, 'variasistore'])->name('produk.variasi.store');
         });
         // SETING ADMIN
         Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
@@ -149,6 +148,14 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return redirect()->route('landing.homepage');
+})->name('clear');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
