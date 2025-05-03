@@ -4,10 +4,16 @@
         <meta name="author" content="admin">
         <meta name="description" content="{{ $landingmain->longname }}">
         <meta name="twitter:title" content="{{ $landingmain->longname }}">
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:description" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }} ">
         <meta name="twitter:image" content="{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}">
         <meta property="og:image" content="{{ asset('storage/' . \App\Models\landing\LandingControllview::value('hero_image')) }}">
         <meta property="og:description" content="{{ \App\Models\landing\LandingControllview::value('hero_subtagline') }} ">
+        <meta property="og:title" content="Pusat Batik Kudus - Muria Batik Kudus" />
+        <meta property="og:url" content="https://muriabatikkudus.com/" />
+        <meta property="og:site_name" content="muria batik kudus" />
+        <link rel="shortlink" href="https://muriabatikkudus.com/">
+        <meta name="msapplication-TileImage" content="https://muriabatikkudus.com/{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}">
     </x-slot>
     <x-slot name="subname">
         Home
