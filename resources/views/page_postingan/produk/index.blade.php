@@ -36,7 +36,6 @@
                                 Rp {{ number_format($produk->harga, 0, ',', '.') }}
                             </div>
                         </td>
-
                         <td>{{ $produk->stock }}</td>
                         <td>
                             @if ($produk->shopee)
@@ -70,10 +69,9 @@
                         </td>
                         <td>
                             <div class="flex gap-2">
-                                {{-- <x-modal.buttonaddvariasi title="Add Variasi" routes="{{ route('produk.variasi.create', $produk->id) }}" /> --}}
+                                <x-modal.buttoneditmodal title="Add Variasi" routes="{{ route('produk.variasi.update', $produk->id) }}" />
                                 <x-modal.buttoneditmodal title="Edit" routes="{{ route('produk.edit', $produk->id) }}" />
                                 <x-button.deletebutton title="Delete" routes="{{ route('produk.destroy', $produk->id) }}" confirmationMessage="Apakah anda yakin ingin menghapus produk ini?" />
-
                             </div>
                         </td>
                     </tr>

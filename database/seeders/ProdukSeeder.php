@@ -65,25 +65,44 @@ class ProdukSeeder extends Seeder
 
             // Menyimpan produk yang sesuai dengan kategori
             if (isset($produkData[$categoryName])) {
+                $i = 0;
                 foreach ($produkData[$categoryName] as $productName) {
-                    $produkSlug = Str::slug($productName) . '-' . Str::slug($categoryName);
+                    $produkSlug = Str::slug($productName) . '-' . $i;
                     $produk = Produk::create([
                         'name' => $productName,
                         'slug' => $produkSlug,
-                        'description' => "Produk $productName adalah bagian dari kategori $categoryName dengan kualitas unggul dan motif khas.",
+                        'description' => "Produk $productName merupakan salah satu koleksi unggulan dari kategori $categoryName yang mengedepankan kualitas, estetika, dan nilai budaya.
+                  Dengan sentuhan seni yang khas, produk ini dirancang tidak hanya sebagai barang fungsional, tetapi juga sebagai simbol keindahan dan filosofi hidup.
+                  Terbuat dari bahan-bahan pilihan berkualitas tinggi, setiap detail pada produk ini dikerjakan dengan ketelitian dan dedikasi oleh para pengrajin berpengalaman.
+                  Motif yang ditampilkan tidak hanya unik dan menarik secara visual, tetapi juga mengandung makna mendalam yang merepresentasikan kekayaan alam, kehidupan sosial, serta warisan budaya lokal.
+                  Produk $productName sangat cocok dijadikan sebagai aksesoris pribadi yang menambah nilai estetika penampilan, maupun sebagai dekorasi rumah yang memperindah suasana ruangan.
+                  Dengan membeli produk ini, Anda tidak hanya mendapatkan barang berkualitas tinggi, tetapi juga turut mendukung pelestarian seni dan budaya tradisional yang semakin langka.
+
+                  Dapatkan produk $productName sekarang dan nikmati sentuhan estetika unik yang menggambarkan kekayaan dan keindahan alam di dalamnya.
+
+                  ",
                         'harga' => $harga,
                         'stock' => 20,
                         'sku' => "$produkSlug",
                         'image' => "masterimagee/$categoryName/$productName.jpg",
-                        'shopee' => "https://shopee.co.id/$productName",
-                        'tokped' => "https://tokopedia.com/$productName",
-                        'tiktokshop' => "https://tiktokshop.com/$productName",
+                        'shopee' => "",
+                        'tokped' => "",
+                        'tiktokshop' => "",
                         'meta_title' => $productName,
-                        'meta_description' => "Produk $productName adalah bagian dari kategori $categoryName dengan kualitas unggul dan motif khas.",
-                        'meta_keywords' => "$productName $categoryName",
+                        'meta_description' => "Produk $productName merupakan salah satu koleksi unggulan dari kategori $categoryName yang mengedepankan kualitas, estetika, dan nilai budaya.
+                  Dengan sentuhan seni yang khas, produk ini dirancang tidak hanya sebagai barang fungsional, tetapi juga sebagai simbol keindahan dan filosofi hidup.
+                  Terbuat dari bahan-bahan pilihan berkualitas tinggi, setiap detail pada produk ini dikerjakan dengan ketelitian dan dedikasi oleh para pengrajin berpengalaman.
+                  Motif yang ditampilkan tidak hanya unik dan menarik secara visual, tetapi juga mengandung makna mendalam yang merepresentasikan kekayaan alam, kehidupan sosial, serta warisan budaya lokal.
+                  Produk $productName sangat cocok dijadikan sebagai aksesoris pribadi yang menambah nilai estetika penampilan, maupun sebagai dekorasi rumah yang memperindah suasana ruangan.
+                  Dengan membeli produk ini, Anda tidak hanya mendapatkan barang berkualitas tinggi, tetapi juga turut mendukung pelestarian seni dan budaya tradisional yang semakin langka.
+
+                  Dapatkan produk $productName sekarang dan nikmati sentuhan estetika unik yang menggambarkan kekayaan dan keindahan alam di dalamnya.
+                  ",
+                        'meta_keywords' => "$productName, $categoryName, Muria batik Kudus, muria, kudus, batik",
                     ]);
                     // Menghubungkan produk dengan kategori melalui tabel pivot
                     $category->produks()->attach($produk->id);  // Benar untuk hubungan many-to-many
+                    $i++;
                 }
             }
         }

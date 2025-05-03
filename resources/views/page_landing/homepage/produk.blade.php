@@ -6,26 +6,32 @@
             </h2>
         </div>
         <div id="produk-container">
-            <div class="px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-6 gap-4 md:px-10">
-                @foreach ($produks as $produk)
-                    <div class="rounded-lg transition-transform transform hover:scale-105 overflow-hidden">
-                        <img src="{{ asset('storage/' . $produk->image) }}" alt="{{ $produk->name }}" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <h3 class="flex items-center gap-2 text-xl font-bold">{{ $produk->name }}</h3>
-                            <p class="text-sm mt-1 line-clamp-2 border-b pb-2 text-left">
-                                {{ \Illuminate\Support\Str::limit($produk->description, 50) }}
-                            </p>
-                            <div class="flex items-center justify-between mt-2">
-                                <p class="text-lg text-base-content font-bold text-left">
-                                    Rp {{ number_format($produk->harga, 0, ',', '.') }}
-                                </p>
-                                <a href="{{ route('landing.produk', $produk->slug) }}" class="bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-primary-dark transition">
-                                    Detail
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Desktop: 8 produk -->
+            <div class="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-10 mt-6">
+                @foreach ($produks->take(8) as $produk)
+                    @include('page_landing.homepage.produkdt', ['produk' => $produk])
                 @endforeach
+            </div>
+
+            <!-- Tablet: 4 produk -->
+            <div class="hidden sm:grid md:hidden grid-cols-1 sm:grid-cols-2 gap-4 px-6 mt-6">
+                @foreach ($produks->take(4) as $produk)
+                    @include('page_landing.homepage.produkdt', ['produk' => $produk])
+                @endforeach
+            </div>
+
+            <!-- Mobile: 3 produk -->
+            <div class="grid sm:hidden grid-cols-1 gap-4 px-4 mt-6">
+                @foreach ($produks->take(3) as $produk)
+                    @include('page_landing.homepage.produkdt', ['produk' => $produk])
+                @endforeach
+            </div>
+
+            <!-- Tombol Lihat Lainnya -->
+            <div class="text-right mt-6 px-10">
+                <a href="{{ route('landing.indexproduk') }}" class="inline-block bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-primary-dark transition justify-end">
+                    Lihat Produk Lainnya
+                </a>
             </div>
         </div>
     </section>

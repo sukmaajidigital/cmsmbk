@@ -46,5 +46,8 @@
     <div id="produk" class="overflow-y-hidden">
         @include('page_landing.homepage.produk')
     </div>
+    <div id="blog" class="overflow-y-hidden">
+        @include('page_landing.homepage.blog')
+    </div>
 
 </x-landinglayoutshomepage>

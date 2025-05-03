@@ -178,28 +178,72 @@ class ProdukController extends Controller
         return to_route('produk.index')->with('success', 'bahan Deleted successfully.');
     }
 
-    // public function variasicreate(Produk $produk)
-    // {
-    //     return view('page_postingan.produk.createvariasi', compact('produk'));
-    // }
+    public function variasi(Produk $produk)
+    {
+        $variasi = ProdukVariasi::where('produk_id', $produk->id)->get();
+        return view('page_postingan.produk.variasi', compact('produk'));
+    }
 
-    // public function variasistore(Request $request, Produk $produk)
-    // {
-    //     $request->validate([
-    //         'nama_variation' => 'required|string|max:255',
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
+    public function variasistore(Request $request, Produk $produk)
+    {
+        $request->validate([
+            'nama_variasi.*' => 'nullable|string|max:255',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'existing_nama_variasi.*' => 'nullable|string|max:255',
+            'existing_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
 
-    //     // Menyimpan gambar
-    //     $imagePath = $request->file('image')->store('produk_variasi_images', 'public');
+        // Hapus variasi jika dicentang
+        if ($request->has('delete_variasi')) {
+            ProdukVariasi::whereIn('id', $request->delete_variasi)->delete();
+        }
 
-    //     // Menyimpan variasi produk
-    //     ProdukVariasi::create([
-    //         'produk_id' => $produk->id,
-    //         'nama_variation' => $request->nama_variation,
-    //         'image' => $imagePath,
-    //     ]);
+        // Update variasi yang ada
+        if ($request->has('existing_ids')) {
+            foreach ($request->existing_ids as $id) {
+                $variasi = ProdukVariasi::find($id);
+                if ($variasi) {
+                    $variasi->nama_variasi = $request->existing_nama_variasi[$id] ?? $variasi->nama_variasi;
 
-    //     return redirect()->route('page_postingan.produk.index', $produk->id)->with('success', 'Variasi produk berhasil ditambahkan!');
-    // }
+                    if (isset($request->existing_image[$id])) {
+                        $imageFile = $request->existing_image[$id];
+
+                        $manager = new ImageManager(new GdDriver());
+                        $image = $manager->read($imageFile->getRealPath())->scaleDown(width: 900, height: 900);
+
+                        $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                        $path = storage_path('app/public/produk_variasi_images/' . $filename);
+                        $image->save($path, quality: 70);
+
+                        $variasi->image = 'produk_variasi_images/' . $filename;
+                    }
+
+                    $variasi->save();
+                }
+            }
+        }
+
+        // Tambah variasi baru
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $index => $imageFile) {
+                $namaVariasi = $request->nama_variasi[$index] ?? null;
+                if (!$namaVariasi || !$imageFile) continue;
+
+                $manager = new ImageManager(new GdDriver());
+                $image = $manager->read($imageFile->getRealPath())->scaleDown(width: 900, height: 900);
+
+                $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $path = storage_path('app/public/produk_variasi_images/' . $filename);
+                $image->save($path, quality: 70);
+
+                ProdukVariasi::create([
+                    'produk_id' => $produk->id,
+                    'nama_variasi' => $namaVariasi,
+                    'image' => 'produk_variasi_images/' . $filename,
+                ]);
+            }
+        }
+
+        return redirect()->route('produk.index', $produk->id)->with('success', 'Variasi berhasil diperbarui!');
+    }
 }

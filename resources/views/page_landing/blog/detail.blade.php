@@ -44,11 +44,7 @@
                             <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?? $blog->title }}" class="rounded-lg shadow-md max-h-[500px] w-auto object-cover">
                         </div>
                     @endif
-
-                    {{-- Blog Content --}}
-                    <div class="prose max-w-full prose-lg text-gray-700">
-                        {!! $blog->content !!}
-                    </div>
+                    {!! $blog->content !!}
                 </div>
 
                 {{-- Sidebar Blog List --}}

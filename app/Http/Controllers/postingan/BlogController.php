@@ -36,6 +36,7 @@ class BlogController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        dd($request);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255',

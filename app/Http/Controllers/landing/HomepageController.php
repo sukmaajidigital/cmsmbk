@@ -9,6 +9,7 @@ use App\Models\landing\LandingControllview;
 use App\Models\landing\LandingMain;
 use App\Models\landing\LandingProses;
 use App\Models\landing\LandingVidio;
+use App\Models\postingan\Blog;
 use App\Models\postingan\Produk;
 use App\Models\postingan\ProdukKategori;
 use Illuminate\Http\Request;
@@ -65,8 +66,13 @@ class HomepageController extends Controller
                     $produkIds->push($produk->produk_id);
                 }
             }
+            return Produk::whereIn('id', $produkIds->unique())->take(8)->get();
+        });
 
-            return Produk::whereIn('id', $produkIds->unique())->take(16)->get();
+        $blogs = Cache::remember('landingpage_blogs', 300, function () {
+            return Blog::orderBy('created_at', 'desc') // blog terbaru
+                ->take(8)
+                ->get();
         });
 
         // --- End produk dengan cache ---
@@ -82,6 +88,7 @@ class HomepageController extends Controller
                 'landingcontrollview',
                 'produks',
                 'produkkategoris',
+                'blogs',
             )
         );
     }

@@ -23,7 +23,7 @@ class Landing extends Seeder
         ]);
         // data kontak
         DB::table('landing_contact')->insert([
-            'telepon' => '+62 811-2828-188',
+            'telepon' => '628112828188',
             'alamat' => 'desa karangmalang rt 004 rw 002, kecamatan gebog, kabupaten kudus, provinsi jawa tengah',
             'email' => 'mbatikkudus@gmail.com',
             'maps' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.797399489367!2d110.832489110015!3d-6.772255666197173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70db15bce5f05d%3A0x3c2a617369092d32!2sMuria%20Batik%20kudus!5e1!3m2!1sid!2sid!4v1745849648233!5m2!1sid!2sid',
@@ -46,7 +46,7 @@ class Landing extends Seeder
             'hero_button' => 'Jelajahi Sekarang',
             'hero_image' => 'hero_image/heroimage.jpg',
             'proses_title' => 'Proses Batik',
-            'proses_subtitle' => 'Dibuat dengan bahan premium dan sentuhan seni terbaik dari pengrajin Indonesia',
+            'proses_subtitle' => 'Setiap helai batik bukan hanya kain bermotif, tetapi juga karya seni yang lahir dari rangkaian proses panjang penuh ketelitian dan makna. Dari menggambar pola hingga pewarnaan, setiap tahap mencerminkan warisan budaya, kesabaran, dan kearifan lokal yang telah diwariskan dari generasi ke generasi.',
             'produk_title' => 'Produk',
             'produk_subtitle' => 'Koleksi Produk Batik Terbaru kami',
         ]);
@@ -54,42 +54,42 @@ class Landing extends Seeder
         DB::table('landing_proses')->insert([
             [
                 'judul' => 'Njaplak',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Proses njaplak merupakan tahap awal dalam membatik, di mana pola dasar atau motif batik dipindahkan dari desain kertas ke kain. Teknik ini biasanya menggunakan alat seperti pensil atau canting kosong tanpa malam untuk menyalin pola secara presisi. Tahap ini sangat penting karena akan menjadi panduan utama dalam seluruh proses membatik berikutnya.',
                 'imageproses' => 'imageproses/1.png',
             ],
             [
                 'judul' => 'Ngecap',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Ngecap adalah proses pencetakan motif batik menggunakan cap tembaga yang telah dibentuk sesuai desain. Cap ini dicelupkan ke malam panas lalu ditekan ke kain dengan hati-hati agar motif tercetak rapi. Proses ini mempercepat pembuatan batik dibandingkan teknik tulis, namun tetap membutuhkan ketelitian tinggi agar hasilnya presisi dan tidak meluber.',
                 'imageproses' => 'imageproses/2.png',
             ],
             [
                 'judul' => 'Nyanting',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Nyanting adalah proses menggambar motif batik secara manual dengan canting dan malam panas di atas kain. Proses ini membutuhkan keahlian dan ketelatenan tinggi, karena garis dan titik harus ditorehkan secara halus sesuai pola. Setiap goresan canting menciptakan karakter unik yang membedakan batik tulis dengan jenis lainnya.',
                 'imageproses' => 'imageproses/4.png',
             ],
             [
                 'judul' => 'Nyolet',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Nyolet merupakan proses pewarnaan motif batik secara manual dengan kuas kecil atau alat khusus. Biasanya dilakukan untuk memberikan warna pada bagian-bagian tertentu dari motif sebelum proses celup warna dilakukan. Teknik ini menambah nuansa artistik dan memperkaya tampilan visual batik dengan gradasi warna yang halus.',
                 'imageproses' => 'imageproses/5.png',
             ],
             [
                 'judul' => 'Nembok',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Nembok adalah proses menutup bagian tertentu dari kain batik menggunakan malam agar tidak terkena warna saat dicelup. Tahap ini berguna untuk mempertahankan warna asli pada area tertentu, dan sering dilakukan berulang kali dalam batik dengan banyak lapisan warna. Proses ini memerlukan perencanaan warna yang cermat dan ketelitian tinggi.',
                 'imageproses' => 'imageproses/6.png',
             ],
             [
                 'judul' => 'Ngewarna',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Ngewarna atau mencelup kain ke dalam larutan pewarna adalah tahap penting untuk memberikan warna dasar pada batik. Proses ini dilakukan setelah motif tertutup malam. Kadang dilakukan beberapa kali dengan warna yang berbeda untuk menciptakan efek berlapis. Penggunaan pewarna alami maupun sintetis sangat mempengaruhi hasil akhir batik.',
                 'imageproses' => 'imageproses/7.png',
             ],
             [
                 'judul' => 'Ngelorod',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Ngelorod adalah proses merebus kain batik dalam air panas untuk menghilangkan malam yang menempel. Setelah malam larut, akan tampak jelas perbedaan warna antara bagian yang tertutup dan yang terkena pewarna. Tahap ini mengungkap keindahan motif batik secara utuh dan menjadi penutup dari proses panjang membatik.',
                 'imageproses' => 'imageproses/8.png',
             ],
             [
                 'judul' => 'Jemur',
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quod corporis consequuntur, quia eos dolore qui recusandae deserunt facere fuga officiis, nulla nobis sint voluptatem suscipit tenetur dolor est quae?',
+                'deskripsi' => 'Jemur adalah proses akhir untuk mengeringkan kain batik setelah melalui pewarnaan dan ngelorod. Penjemuran dilakukan di tempat terbuka namun teduh agar warna tidak pudar terkena sinar matahari langsung. Tahap ini memastikan kain benar-benar kering sebelum siap digunakan atau dipasarkan sebagai kain batik yang utuh.',
                 'imageproses' => 'imageproses/9.png',
             ],
         ]);

@@ -19,21 +19,27 @@ class LandingProdukController extends Controller
         $landingmain = Cache::remember('landingmain', 300, function () {
             return LandingMain::first();
         });
+
         $produkkategoris = Cache::remember('produkkategoris', 300, function () {
             return ProdukKategori::select('id', 'nama_kategori')->get();
         });
 
-        // Produk: Cache hanya query dasar
-        $produkQuery = Produk::query(); // Tidak cache paginasi
-        $produks = $produkQuery->paginate(16);
-        return view(
-            'page_landing.produk.index',
-            compact(
-                'landingmain',
-                'produks',
-                'produkkategoris',
-            )
-        );
+        $produkQuery = Produk::query()->with('kategoris'); // eager load kategori
+
+        if ($request->has('kategori')) {
+            $kategoriId = $request->get('kategori');
+            $produkQuery->whereHas('kategoris', function ($query) use ($kategoriId) {
+                $query->where('produk_kategoris.id', $kategoriId);
+            });
+        }
+
+        $produks = $produkQuery->paginate(16)->withQueryString(); // bawa query di pagination
+
+        return view('page_landing.produk.index', compact(
+            'landingmain',
+            'produks',
+            'produkkategoris',
+        ));
     }
     public function produkdetail($slug)
     {
