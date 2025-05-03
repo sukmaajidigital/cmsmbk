@@ -46,7 +46,7 @@ class Landing extends Seeder
             'hero_button' => 'Jelajahi Sekarang',
             'hero_image' => 'hero_image/heroimage.jpg',
             'proses_title' => 'Proses Batik',
-            'proses_subtitle' => 'Setiap helai batik bukan hanya kain bermotif, tetapi juga karya seni yang lahir dari rangkaian proses panjang penuh ketelitian dan makna. Dari menggambar pola hingga pewarnaan, setiap tahap mencerminkan warisan budaya, kesabaran, dan kearifan lokal yang telah diwariskan dari generasi ke generasi.',
+            'proses_subtitle' => 'Setiap helai batik bukan hanya kain bermotif',
             'produk_title' => 'Produk',
             'produk_subtitle' => 'Koleksi Produk Batik Terbaru kami',
         ]);
