@@ -1,6 +1,6 @@
 <section class="min-w-screen min-h-screen py-16 text-center bg-opacity-40 mt-10">
     <h2 class="text-3xl font-bold">{{ \App\Models\landing\LandingControllview::value('proses_title') }}</h2>
-    <p class="mt-4 text-lg">{{ \App\Models\landing\LandingControllview::value('proses_subtitle') }}</p>
+    <p class="mt-4 text-lg px-20">{{ \App\Models\landing\LandingControllview::value('proses_subtitle') }}</p>
 
     <div class="w-full mt-6 relative flex items-center justify-center">
         {{-- <!-- Tombol kiri --> --}}
@@ -21,7 +21,7 @@
                         {{-- remove opacity on hover opacity-0 group-hover:opacity-95  --}}
                         <p class="mt-2 text-black font-bold text-sm text-center transition-opacity duration-300">{{ $proses->judul ?? 'kosong' }}</p>
                         <p class="mt-2 text-black text-sm text-center transition-opacity duration-300">
-                            {{ Str::limit($proses->deskripsi ?? 'kosong', 100) }}
+                            {{ Str::limit($proses->deskripsi ?? 'kosong', 200) }}
                         </p>
                     </div>
                 @endforeach

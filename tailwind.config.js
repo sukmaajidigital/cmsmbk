@@ -22,6 +22,7 @@ module.exports = {
         require("flyonui/plugin"),
         // Iconify plugin
         addDynamicIconSelectors(),
+        require('@tailwindcss/typography'),
     ],
     flyonui: {
         themes: [

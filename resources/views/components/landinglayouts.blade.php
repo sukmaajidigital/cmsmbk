@@ -24,6 +24,7 @@
     {{-- <!-- Stylesheets --> --}}
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('assets/datatable/datatable.css') }}" />
+    <link rel="stylesheet" href="{{ asset('richtexteditor/richtexteditor/rte_theme_default.css') }}" />
 </head>
 
 <body class="bg-base-100 text-base-content">
@@ -44,6 +45,8 @@
     <script type="text/javascript" src="{{ asset('assets/datatable/datatable.min.js') }}"></script>
     @stack('script')
     @stack('componentscript')
+    <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/rte.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/plugins/all_plugins.js') }}"></script>
 </body>
 
 </html>

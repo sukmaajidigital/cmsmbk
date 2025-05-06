@@ -29,22 +29,26 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
                 {{-- Konten Blog --}}
-                <div class="md:col-span-4 pr-0 md:pr-6">
+                <div class="md:col-span-4 pr-0 md:pr-6 prose prose-lg max-w-none">
                     {{-- Header --}}
                     <div class="text-center mb-10">
-                        <h1 class="text-3xl md:text-4xl font-bold text-gray-800">{{ $blog->title }}</h1>
+                        <h1 class="">{{ $blog->title }}</h1>
                         @if ($blog->published_at)
                             <p class="text-sm text-gray-500 mt-2">Dipublikasikan pada {{ $blog->published_at }}</p>
                         @endif
                     </div>
 
-                    {{-- Featured Image --}}
                     @if ($blog->featured_image)
-                        <div class="flex justify-center mb-8">
-                            <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?? $blog->title }}" class="rounded-lg shadow-md max-h-[500px] w-auto object-cover">
+                        <div class="w-full mb-8">
+                            <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?? $blog->title }}" class="w-full h-[400px] object-cover rounded-lg shadow-md">
                         </div>
                     @endif
-                    {!! $blog->content !!}
+
+
+                    {{-- Konten Artikel --}}
+                    <div class="">
+                        {!! $blog->content !!}
+                    </div>
                 </div>
 
                 {{-- Sidebar Blog List --}}

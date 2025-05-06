@@ -4,7 +4,7 @@
 {{-- Slug --}}
 <x-forms.text-input required="required" label="Slug" id="slug" name="slug" :value="old('slug', $blog->slug ?? '')" />
 {{-- Konten --}}
-<x-forms.textarea-input required="" label="Konten" id="text_editor" name="content" :value="old('content', $blog->content ?? '')" />
+<x-forms.textarea-input required="" label="Konten" id="text_editor" class="hidden" name="content" :value="old('content', $blog->content ?? '')" />
 {{-- Semua lainnya dibagi 2 kolom --}}
 <div class="grid grid-cols-2 gap-6 mt-6">
     <div>
@@ -51,53 +51,58 @@
 <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/rte.js') }}"></script>
 <script type="text/javascript" src="{{ asset('richtexteditor/richtexteditor/plugins/all_plugins.js') }}"></script>
 <script>
-    var config = {};
+    const config = {};
 
     config.file_upload_handler = function(file, callback, optionalIndex, optionalFiles) {
-        var uploadHandlerPath = "{{ route('image.upload') }}";
+        const uploadHandlerPath = "{{ route('image.upload') }}";
 
-        function append(parent, tagname, csstext) {
-            var tag = parent.ownerDocument.createElement(tagname);
-            if (csstext) tag.style.cssText = csstext;
+        const append = (parent, tagname, classNames) => {
+            const tag = document.createElement(tagname);
+            if (classNames) tag.className = classNames;
             parent.appendChild(tag);
             return tag;
-        }
+        };
 
-        var uploadCancelled = false;
-        var dialogOuter = append(document.body, "div", "display:flex;align-items:center;justify-content:center;z-index:999999;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(128,128,128,0.5)");
-        var dialogInner = append(dialogOuter, "div", "background-color:white;border:solid 1px gray;border-radius:15px;padding:15px;min-width:200px;box-shadow:2px 2px 6px #7777");
+        let uploadCancelled = false;
 
-        var line1 = append(dialogInner, "div", "text-align:center;font-size:1.2em;margin:0.5em;");
+        // Modal overlay
+        const dialogOuter = append(document.body, "div", "fixed inset-0 z-[999999] flex items-center justify-center bg-gray-500 bg-opacity-50");
+        const dialogInner = append(dialogOuter, "div", "bg-white rounded-lg border border-gray-300 p-6 shadow-lg min-w-[200px]");
+
+        // Upload text
+        const line1 = append(dialogInner, "div", "text-center text-lg mb-2 font-medium");
         line1.innerText = "Uploading...";
 
-        var line2 = append(dialogInner, "div", "text-align:center;font-size:1.0em;margin:0.5em;");
+        const line2 = append(dialogInner, "div", "text-center text-base mb-2");
         line2.innerText = "0%";
 
-        var progressbar = append(dialogInner, "div", "border:solid 1px gray;margin:0.5em;");
-        var progressbg = append(progressbar, "div", "height:12px");
+        // Progress bar
+        const progressbar = append(dialogInner, "div", "w-full bg-gray-200 rounded h-3 mb-4 overflow-hidden");
+        const progressbg = append(progressbar, "div", "bg-green-500 h-full w-0");
 
-        var line3 = append(dialogInner, "div", "text-align:center;font-size:1.0em;margin:0.5em;");
-        var btn = append(line3, "button");
-        btn.className = "btn btn-primary";
+        // Cancel button
+        const line3 = append(dialogInner, "div", "text-center");
+        const btn = append(line3, "button", "bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600");
         btn.innerText = "Cancel";
         btn.onclick = function() {
             uploadCancelled = true;
             xh.abort();
-        }
+        };
 
-        var xh = new XMLHttpRequest();
-        var formData = new FormData();
+        // Upload via XMLHttpRequest
+        const xh = new XMLHttpRequest();
+        const formData = new FormData();
         formData.append('image', file);
         formData.append('_token', "{{ csrf_token() }}");
 
         xh.open("POST", uploadHandlerPath, true);
         xh.onload = xh.onabort = xh.onerror = function(pe) {
-            dialogOuter.parentNode.removeChild(dialogOuter);
-            if (pe.type == "load") {
-                if (xh.status != 200) {
+            dialogOuter.remove();
+            if (pe.type === "load") {
+                if (xh.status !== 200) {
                     callback(null, "http-error-" + xh.status);
                 } else {
-                    var response = JSON.parse(xh.responseText);
+                    const response = JSON.parse(xh.responseText);
                     if (response.url) {
                         callback(response.url);
                     } else {
@@ -112,13 +117,14 @@
         };
 
         xh.upload.onprogress = function(pe) {
-            var percent = Math.floor((pe.loaded / pe.total) * 100);
+            const percent = Math.floor((pe.loaded / pe.total) * 100);
             line2.innerText = percent + "%";
-            progressbg.style.cssText = `background-color:green;width:${percent}%;height:12px;`;
+            progressbg.style.width = `${percent}%`;
         };
 
         xh.send(formData);
     };
 
-    var editor1 = new RichTextEditor("#text_editor", config);
+    // Init RTE
+    new RichTextEditor("#text_editor", config);
 </script>

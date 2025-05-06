@@ -168,8 +168,10 @@ Route::get('/about', [HomepageController::class, 'about'])->name('landing.about'
 Route::get('/contact', [HomepageController::class, 'contact'])->name('landing.contact');
 Route::get('/test', [HomepageController::class, 'test'])->name('landing.test');
 
-Route::get('/blog', [LandingBlogController::class, 'index'])->name('landing.indexblog');
-Route::get('/blog/{slug}', [LandingBlogController::class, 'detail'])->name('landing.detailblog');
+
 
 Route::get('/produk', [LandingProdukController::class, 'indexproduk'])->name('landing.indexproduk');
-Route::get('/{slug}', [LandingProdukController::class, 'produkdetail'])->name('landing.produk');
+Route::get('/produk/{slug}', [LandingProdukController::class, 'produkdetail'])->name('landing.produk');
+
+Route::get('/blog', [LandingBlogController::class, 'index'])->name('landing.indexblog');
+Route::get('/{slug}', [LandingBlogController::class, 'detail'])->name('landing.detailblog');
