@@ -1,24 +1,31 @@
 {{-- resources/views/page_landing/blog/detail.blade.php --}}
 <x-landinglayouts>
     <x-slot name="meta">
-        {{-- Meta SEO dinamis --}}
-        <title>{{ $blog->meta_title ?? $blog->title }}</title>
-        <meta name="description" content="{{ $blog->meta_description ?? Str::limit(strip_tags($blog->content), 150) }}">
-        <meta name="keywords" content="{{ $blog->meta_keywords ?? 'blog' }}">
+        <title>{{ $blog->meta_title ?? ($blog->title ?? '') }}</title>
+        <meta name="description" content="{{ $blog->meta_description ?? Str::limit(strip_tags($blog->content ?? ''), 150) }}">
+        <meta name="keywords" content="{{ $blog->meta_keywords ?? '' }}">
         <meta name="author" content="{{ $blog->user->name ?? 'Admin' }}">
+        <meta name="keyphrases" content="{{ $blog->meta_keywords ?? '' }}">
+        <meta name="classification" content="{{ $blog->meta_keywords ?? '' }}">
+        <link rel="canonical" href="{{ url()->current() }}">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 
-        {{-- Twitter Card --}}
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="{{ $blog->meta_title ?? $blog->title }}">
-        <meta name="twitter:description" content="{{ $blog->meta_description ?? Str::limit(strip_tags($blog->content), 150) }}">
-        <meta name="twitter:image" content="{{ $blog->og_image ? asset('storage/' . $blog->og_image) : asset('default-og-image.jpg') }}">
-
-        {{-- Open Graph / Facebook --}}
         <meta property="og:type" content="article">
-        <meta property="og:title" content="{{ $blog->og_title ?? $blog->title }}">
-        <meta property="og:description" content="{{ $blog->og_description ?? Str::limit(strip_tags($blog->content), 150) }}">
-        <meta property="og:image" content="{{ $blog->og_image ? asset('storage/' . $blog->og_image) : asset('default-og-image.jpg') }}">
+        <meta property="og:site_name" content="{{ config('app.name', '') }}">
+        <meta property="og:locale" content="id_ID">
         <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:title" content="{{ $blog->og_title ?? ($blog->title ?? '') }}">
+        <meta property="og:description" content="{{ $blog->og_description ?? Str::limit(strip_tags($blog->content ?? ''), 150) }}">
+        <meta property="og:image" content="{{ $blog->og_image ? asset('storage/' . $blog->og_image) : asset('default-og-image.jpg') }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:creator" content="">
+        <meta name="twitter:url" content="{{ url()->current() }}">
+        <meta name="twitter:title" content="{{ $blog->meta_title ?? ($blog->title ?? '') }}">
+        <meta name="twitter:description" content="{{ $blog->meta_description ?? Str::limit(strip_tags($blog->content ?? ''), 150) }}">
+        <meta name="twitter:image" content="{{ $blog->og_image ? asset('storage/' . $blog->og_image) : asset('default-og-image.jpg') }}">
     </x-slot>
 
     <x-slot name="subname">

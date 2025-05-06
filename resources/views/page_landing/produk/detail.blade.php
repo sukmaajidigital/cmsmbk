@@ -1,13 +1,30 @@
 <x-landinglayouts>
     <x-slot name="meta">
-        <meta name="keywords" content="{{ $produk->meta_keywords }}">
-        <meta name="author" content="admin">
+        <title>{{ $produk->meta_title ?? ($produk->title ?? '') }}</title>
         <meta name="description" content="{{ $produk->meta_description }}">
-        <meta name="twitter:title" content="{{ $produk->meta_title }}">
-        <meta name="twitter:description" content="{{ $produk->meta_description }}">
-        <meta name="twitter:image" content="{{ asset('storage/' . $produk->image) }}">
-        <meta property="og:image" content="{{ asset('storage/' . $produk->image) }}">
-        <meta property="og:description" content="{{ $produk->meta_description }}">
+        <meta name="keywords" content="{{ $produk->meta_keywords ?? '' }}">
+        <meta name="author" content="{{ $produk->user->name ?? 'Admin' }}">
+        <meta name="keyphrases" content="{{ $produk->meta_keywords ?? '' }}">
+        <meta name="classification" content="{{ $produk->meta_keywords ?? '' }}">
+        <link rel="canonical" href="{{ url()->current() }}">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+
+        <meta property="og:type" content="article">
+        <meta property="og:site_name" content="{{ config('app.name', '') }}">
+        <meta property="og:locale" content="id_ID">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:title" content="{{ $produk->og_title ?? ($produk->title ?? '') }}">
+        <meta property="og:description" content="{{ $produk->og_description ?? Str::limit(strip_tags($produk->content ?? ''), 150) }}">
+        <meta property="og:image" content="{{ $produk->image ? asset('storage/' . $produk->image) : asset('default-og-image.jpg') }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:creator" content="">
+        <meta name="twitter:url" content="{{ url()->current() }}">
+        <meta name="twitter:title" content="{{ $produk->meta_title ?? ($produk->title ?? '') }}">
+        <meta name="twitter:description" content="{{ $produk->meta_description ?? Str::limit(strip_tags($produk->content ?? ''), 150) }}">
+        <meta name="twitter:image" content="{{ $produk->image ? asset('storage/' . $produk->image) : asset('default-og-image.jpg') }}">
     </x-slot>
 
     <x-slot name="subname">

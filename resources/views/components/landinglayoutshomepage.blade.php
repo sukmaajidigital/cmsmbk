@@ -14,7 +14,7 @@
     <meta property="og:locale:alternate" content="en">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}">
     <link rel="icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#00753C">

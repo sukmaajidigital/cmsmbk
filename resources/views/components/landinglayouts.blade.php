@@ -3,8 +3,9 @@
 
 <head>
     {{-- static seo --}}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ \App\Models\landing\LandingMain::value('longname') }}</title>
     <meta name="title" content="{{ \App\Models\landing\LandingMain::value('longname') }}">
     <meta property="og:title" content="{{ $subname ?? '' }}">
@@ -14,11 +15,11 @@
     <meta property="og:locale:alternate" content="en">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}">
     <link rel="icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#00753C">
-    <meta name="theme-color" content="#00753C">
+    <meta name="msapplication-TileColor" content="#ffc107">
+    <meta name="theme-color" content="#ffc107">
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}" />
 
     {{-- <!-- Stylesheets --> --}}
