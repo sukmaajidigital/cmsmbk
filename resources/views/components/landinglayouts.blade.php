@@ -21,7 +21,7 @@
     <meta name="msapplication-TileColor" content="#ffc107">
     <meta name="theme-color" content="#ffc107">
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}" />
-
+    <link rel="canonical" href="{{ url()->current() }}" />
     {{-- <!-- Stylesheets --> --}}
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('assets/datatable/datatable.css') }}" />

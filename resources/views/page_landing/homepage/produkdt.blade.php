@@ -7,7 +7,7 @@
         </p>
         <div class="flex items-center justify-between mt-2">
             <p class="text-lg text-base-content font-bold text-left">
-                Rp {{ number_format($produk->harga, 0, ',', '.') }}
+                {{-- Rp {{ number_format($produk->harga, 0, ',', '.') }} --}}
             </p>
             <a href="{{ route('landing.produk', $produk->slug) }}" class="bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-primary-dark transition">
                 Detail

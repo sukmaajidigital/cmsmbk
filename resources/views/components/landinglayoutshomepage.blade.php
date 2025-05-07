@@ -5,6 +5,7 @@
     {{-- static seo --}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ \App\Models\landing\LandingMain::value('longname') }}</title>
     <meta name="title" content="{{ \App\Models\landing\LandingMain::value('longname') }}">
     <meta property="og:title" content="{{ $subname ?? '' }}">
@@ -20,7 +21,7 @@
     <meta name="msapplication-TileColor" content="#00753C">
     <meta name="theme-color" content="#00753C">
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/' . \App\Models\landing\LandingMain::value('icon')) }}" />
-
+    <link rel="canonical" href="https://www.muriabatik.com" />
     {{-- <!-- Stylesheets --> --}}
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('assets/datatable/datatable.css') }}" />

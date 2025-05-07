@@ -1,8 +1,29 @@
-User-agent: *
-Disallow:
-Disallow: /admin/
+# robots.txt untuk muriabatik.com
 
-# Allow everything else
+# 1. Blokir semua bot dari direktori admin
+User-agent: *
+Disallow: /admin/
+Disallow: /config/
+Disallow: /temp/
+
+# 2. Izinkan akses ke file tertentu di /admin/
+Allow: /login
+
+# 3. Batasi crawl rate untuk Bingbot
+User-agent: bingbot
+Crawl-delay: 10
+
+# 4. Blokir bot tertentu (misalnya AhrefsBot)
+User-agent: AhrefsBot
+Disallow: /
+
+# 5. Izinkan Googlebot untuk semua halaman
+User-agent: Googlebot
 Allow: /
 
-Sitemap: https://muriabatik.com.muriabatikkudus.com/sitemap.xml
+# 6. Blokir parameter pencarian
+User-agent: *
+Allow: /*?search=
+
+# 7. Tentukan sitemap
+Sitemap: https://muriabatik.com/sitemap.xml
