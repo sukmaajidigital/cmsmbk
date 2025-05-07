@@ -15,7 +15,7 @@ Crawl-delay: 10
 
 # 4. Blokir bot tertentu (misalnya AhrefsBot)
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
 
 # 5. Izinkan Googlebot untuk semua halaman
 User-agent: Googlebot
